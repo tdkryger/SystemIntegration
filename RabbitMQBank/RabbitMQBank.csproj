@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Bank Queues.uxf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
