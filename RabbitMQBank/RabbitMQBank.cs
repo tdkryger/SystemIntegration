@@ -64,15 +64,17 @@ namespace RabbitMQBank
 
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: SendQueueName,
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
 
-                //string message = "Hello Rabbit!";
-                //Split recieveMessage into params
-                // ssn;creditScore;amount;duration
+
+                //channel.QueueDeclare(queue: SendQueueName,
+                //                     durable: false,
+                //                     exclusive: false,
+                //                     autoDelete: false,
+                //                     arguments: null);
+
+                ////string message = "Hello Rabbit!";
+                ////Split recieveMessage into params
+                //// ssn;creditScore;amount;duration
                 string[] parts = message.Split(';');
                 string ssn = parts[0];
                 int creditScore = 0;
@@ -84,13 +86,15 @@ namespace RabbitMQBank
 
                 double sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
-                byte[] outBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
+                Utility.HandleMessaging.SendMessage<double>(channel, SendQueueName, sendMessage);
 
-                channel.BasicPublish(exchange: "",
-                                     routingKey: SendQueueName,
-                                     basicProperties: null,
-                                     body: outBody);
-                Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
+                //byte[] outBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
+
+                //channel.BasicPublish(exchange: "",
+                //                     routingKey: SendQueueName,
+                //                     basicProperties: null,
+                //                     body: outBody);
+                //Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
             }
         }
     }
