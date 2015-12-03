@@ -30,7 +30,7 @@ namespace RabbitMQBankTest
                 using (SendChannel = connection.CreateModel())
                 {
 
-                    Utility.HandleMessaging.SendMessage<string>(SendChannel, SendQueueName, "123456-7890;300;1208.60;17");
+                    Utility.HandleMessaging.SendMessage<string>(SendQueueName, "123456-7890;300;1208.60;17");
 
                     //SendChannel.QueueDeclare(queue: SendQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 

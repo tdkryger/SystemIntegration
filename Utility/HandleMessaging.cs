@@ -10,13 +10,23 @@ namespace Utility
 {
     public static class HandleMessaging
     {
-        public static void SendMessage<T>(IModel channel, string queueName, T messageObject)
+        private static IModel channel = null;
+
+        private static IModel Channel
+        {
+            get
+            {
+                return channel == null ? new ConnectionFactory() { HostName = "datdb.cphbusiness.dk" }.CreateConnection().CreateModel() : channel;
+            }
+        }
+
+        public static void SendMessage<T>(string queueName, T messageObject)
         {
             try
             {
                 byte[] body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(messageObject));
 
-                channel.BasicPublish(exchange: "",
+                Channel.BasicPublish(exchange: "",
                                      routingKey: queueName,
                                      basicProperties: null,
                                      body: body);
