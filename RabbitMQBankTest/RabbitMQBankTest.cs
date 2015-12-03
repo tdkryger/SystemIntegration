@@ -1,73 +1,39 @@
 ﻿using LoanBroker.model;
-using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace RabbitMQBankTest
 {
     class RabbitMQBankTest
     {
-        static IModel SendChannel;
-        //static IModel ReceiveChannel;
-        static IConnection connection;
-
         static string SendQueueName = "group1_delegater_out";
-        static string ReceiveQueueName = "group1_bank_out";
+        static string ReceiveQueueName = "group1_delegater_out";
 
         static void Main(string[] args)
         {
+            Console.Write("-->Number of messages to send: ");
+            int messages = Int32.Parse(Console.ReadLine());
 
-
-            var factory = new ConnectionFactory()
+            Console.WriteLine("\n<--Started sending messages!");
+            for (int i = 0; i < messages; i++)
             {
-                HostName = "datdb.cphbusiness.dk"
-            };
-
-            using (connection = factory.CreateConnection())
-            {
-                using (SendChannel = connection.CreateModel())
-                {
-                    Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = 123, CreditScore = 12, Duration = 12, SSN = "785637-1234" });
-
-                    //SendChannel.QueueDeclare(queue: SendQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
-
-                    //string sendMessage = "123456-7890;300;1208.60;17";
-                    //var sendBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
-
-                    //SendChannel.BasicPublish(exchange: "", routingKey: SendQueueName, basicProperties: null, body: sendBody);
-                    //Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
-
-                    ReceiveReply(connection);
-                }
+                Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = ((i + 1) * 10), CreditScore = 12, Duration = 12, SSN = "785637-1234" });
+                Console.WriteLine("<--Messages sent: " + (i + 1) + "/" + messages);
             }
+            Console.WriteLine("<--Stopped sending messages!\n");
 
-        }
+            Console.Write("-->Press [Enter] to start receiving messages.");
+            Console.ReadLine();
 
-        static void ReceiveReply(IConnection connection)
-        {
-            using (var channel = connection.CreateModel())
+            Console.WriteLine("\n<--Started receiving messages!");
+            Utility.HandleMessaging.RecieveMessage(ReceiveQueueName, delegate (BasicDeliverEventArgs ea)
             {
-                channel.QueueDeclare(queue: ReceiveQueueName,
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
-
-                var consumer = new EventingBasicConsumer(channel);
-                consumer.Received += (model, ea) =>
-                {
-                    var body = ea.Body;
-                    var message = Encoding.UTF8.GetString(body);
-                    Console.WriteLine(" [x] Received {0}", message);
-                };
-                channel.BasicConsume(queue: ReceiveQueueName,
-                                     noAck: true,
-                                     consumer: consumer);
-                Console.ReadLine();
-            }
+                byte[] body = ea.Body;
+                string message = Encoding.UTF8.GetString(body);
+                Console.WriteLine("<--Message: " + message + " on queue: " + ea.RoutingKey);
+            });
+            Console.WriteLine("<--Stopped receiving messages!\n");
         }
     }
 }
