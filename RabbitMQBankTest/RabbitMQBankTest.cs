@@ -13,8 +13,8 @@ namespace RabbitMQBankTest
         //static IModel ReceiveChannel;
         static IConnection connection;
 
-        static string SendQueueName = "OurRecieveBankQueue";
-        static string ReceiveQueueName = "OurSendBankQueue";
+        static string SendQueueName = "group1_delegater_out";
+        static string ReceiveQueueName = "group1_bank_out";
 
         static void Main(string[] args)
         {
