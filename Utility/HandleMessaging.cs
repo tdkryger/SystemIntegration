@@ -24,13 +24,14 @@ namespace Utility
         {
             try
             {
-                byte[] body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(messageObject));
+                string jSonString = JsonConvert.SerializeObject(messageObject);
+                byte[] body = Encoding.UTF8.GetBytes(jSonString);
 
                 Channel.BasicPublish(exchange: "",
                                      routingKey: queueName,
                                      basicProperties: null,
                                      body: body);
-                Console.WriteLine(" [x] Sent {0}", messageObject.ToString());
+                Console.WriteLine(" [x] Sent {0}", jSonString);
             }
             catch (Exception e)
             {

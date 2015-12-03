@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using LoanBroker.model;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace RabbitMQBankTest
 
         static void Main(string[] args)
         {
-            
+
 
             var factory = new ConnectionFactory()
             {
@@ -29,8 +30,7 @@ namespace RabbitMQBankTest
             {
                 using (SendChannel = connection.CreateModel())
                 {
-
-                    Utility.HandleMessaging.SendMessage<string>(SendQueueName, "123456-7890;300;1208.60;17");
+                    Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = 123, CreditScore = 12, Duration = 12, SSN = "785637-1234" });
 
                     //SendChannel.QueueDeclare(queue: SendQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 

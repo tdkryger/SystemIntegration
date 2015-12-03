@@ -86,7 +86,7 @@ namespace RabbitMQBank
 
                 double sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
-                Utility.HandleMessaging.SendMessage<double>(channel, SendQueueName, sendMessage);
+                Utility.HandleMessaging.SendMessage<double>(SendQueueName, sendMessage);
 
                 //byte[] outBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
 
