@@ -20,7 +20,7 @@ namespace Utility
                                      routingKey: queueName,
                                      basicProperties: null,
                                      body: body);
-                Console.WriteLine(" [x] Sent {0}", body.ToString());
+                Console.WriteLine(" [x] Sent {0}", messageObject.ToString());
             }
             catch (Exception e)
             {

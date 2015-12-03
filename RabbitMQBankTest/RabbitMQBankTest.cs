@@ -18,6 +18,8 @@ namespace RabbitMQBankTest
 
         static void Main(string[] args)
         {
+            
+
             var factory = new ConnectionFactory()
             {
                 HostName = "datdb.cphbusiness.dk"
@@ -27,13 +29,16 @@ namespace RabbitMQBankTest
             {
                 using (SendChannel = connection.CreateModel())
                 {
-                    SendChannel.QueueDeclare(queue: SendQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
-                    string sendMessage = "123456-7890;300;1208.60;17";
-                    var sendBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
+                    Utility.HandleMessaging.SendMessage<string>(SendChannel, SendQueueName, "123456-7890;300;1208.60;17");
 
-                    SendChannel.BasicPublish(exchange: "", routingKey: SendQueueName, basicProperties: null, body: sendBody);
-                    Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
+                    //SendChannel.QueueDeclare(queue: SendQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+
+                    //string sendMessage = "123456-7890;300;1208.60;17";
+                    //var sendBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
+
+                    //SendChannel.BasicPublish(exchange: "", routingKey: SendQueueName, basicProperties: null, body: sendBody);
+                    //Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
 
                     ReceiveReply(connection);
                 }
