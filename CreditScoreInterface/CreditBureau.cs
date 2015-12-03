@@ -10,6 +10,11 @@ namespace CreditScoreInterface
     /// </summary>
     public static class CreditBureau
     {
+        /// <summary>
+        /// aekgjladkfjglkadhfgl
+        /// </summary>
+        /// <param name="ssn"></param>
+        /// <returns></returns>
         public static int GetCreditScore(string ssn)
         {
            
