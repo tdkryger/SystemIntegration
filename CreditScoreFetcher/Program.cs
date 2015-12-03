@@ -54,38 +54,6 @@ namespace CreditScoreFetcher
             }
         }
 
-        static void SendReply(IConnection connection, string theMessage)
-        {
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclare(queue: SendQueueName,
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
-
-                //string message = "Hello Rabbit!";
-                //Split recieveMessage into params
-                // ssn;creditScore;amount;duration
-                string[] parts = theMessage.Split(';');
-                string ssn = parts[0];
-                int creditScore = 0;
-                int.TryParse(parts[1], out creditScore);
-                double amount = 0;
-                double.TryParse(parts[2], out amount);
-                int duration = 0;
-                int.TryParse(parts[3], out duration);
-
-                double sendMessage = 89;
-
-                var body = Encoding.UTF8.GetBytes(sendMessage.ToString());
-
-                channel.BasicPublish(exchange: "",
-                                     routingKey: SendQueueName,
-                                     basicProperties: null,
-                                     body: body);
-                Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
-            }
-        }
+        
     }
 }
