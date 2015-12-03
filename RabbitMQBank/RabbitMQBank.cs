@@ -40,14 +40,7 @@ namespace RabbitMQBank
 
                     var consumer = new EventingBasicConsumer(ReceiveChannel);
 
-                    consumer.Received += (model, ea) =>
-                    {
-                        var body = ea.Body;
-                        var message = Encoding.UTF8.GetString(body);
-                        Console.WriteLine(" [x] Received {0}", message);
-
-                        SendReply(connection, message);
-                    };
+                    consumer.Received += Consumer_Received;
 
                     ReceiveChannel.BasicConsume(queue: ReceiveQueueName, noAck: true, consumer: consumer);
 
@@ -57,8 +50,12 @@ namespace RabbitMQBank
             }
         }
 
-        static void SendReply(IConnection connection, string theMessage)
+        private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
+            byte[] inBody = e.Body;
+            string message = Encoding.UTF8.GetString(inBody);
+            Console.WriteLine(" [x] Received {0}", message);
+
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(queue: SendQueueName,
@@ -70,7 +67,7 @@ namespace RabbitMQBank
                 //string message = "Hello Rabbit!";
                 //Split recieveMessage into params
                 // ssn;creditScore;amount;duration
-                string[] parts = theMessage.Split(';');
+                string[] parts = message.Split(';');
                 string ssn = parts[0];
                 int creditScore = 0;
                 int.TryParse(parts[1], out creditScore);
@@ -81,12 +78,12 @@ namespace RabbitMQBank
 
                 double sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
-                var body = Encoding.UTF8.GetBytes(sendMessage.ToString());
+                byte[] outBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
 
                 channel.BasicPublish(exchange: "",
                                      routingKey: SendQueueName,
                                      basicProperties: null,
-                                     body: body);
+                                     body: outBody);
                 Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
             }
         }
