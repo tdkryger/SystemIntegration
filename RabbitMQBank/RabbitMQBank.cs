@@ -5,26 +5,32 @@ using System.Text;
 using RabbitMQ;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System.Resources;
 
 namespace RabbitMQBank
 {
     class RabbitMQBank
     {
-        //static IModel SendChannel;
         static IModel ReceiveChannel;
         static IConnection connection;
 
-        static string SendQueueName = "OurSendBankQueue";
-        static string ReceiveQueueName = "OurRecieveBankQueue";
+        static string SendQueueName = "group1_bank_out";
+        static string ReceiveQueueName = "group1_delegater_out";
 
         static void Main(string[] args)
         {
             /*
+            group1_delegater_out
                 1)  Factory
                 2)  Wait for message
                 3)  Responde to message
                 4)  Goto 2
             */
+
+            // Get Queue names from LoanBroker Project
+            //ResourceManager resMan = new ResourceManager("LoanBroker", System.Reflection.Assembly.GetExecutingAssembly());
+            //ReceiveQueueName = resMan.GetString("QueueNameBankDelegator");
+            //SendQueueName = resMan.GetString("QueueNameBankOut");
 
             var factory = new ConnectionFactory()
             {
