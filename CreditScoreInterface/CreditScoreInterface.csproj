@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\CreditScoreService\CreditScoreInterface.CreditScoreService.creditScoreResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\CreditScoreService\CreditScoreService.wsdl" />
     <None Include="Service References\CreditScoreService\CreditScoreService.xsd">
       <SubType>Designer</SubType>
