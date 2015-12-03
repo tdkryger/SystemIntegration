@@ -17,8 +17,7 @@ namespace CreditScoreInterface
         /// <returns></returns>
         public static int GetCreditScore(string ssn)
         {
-           
-            var csi = new CreditScoreService.CreditScoreServiceClient();
+                       var csi = new CreditScoreService.CreditScoreServiceClient();
             int returnValue = csi.creditScore(ssn);
             csi = null;
             return returnValue;
