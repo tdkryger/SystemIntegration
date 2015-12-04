@@ -13,7 +13,7 @@ namespace RabbitMQBankTest
 
         static void Main(string[] args)
         {
-            Console.Write("-->Number of messages to sendE: ");
+            Console.Write("-->Number of messages to send: ");
             int messages = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("\n\t<--Started sending messages!");
