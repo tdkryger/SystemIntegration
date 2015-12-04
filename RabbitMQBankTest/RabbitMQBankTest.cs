@@ -8,7 +8,7 @@ namespace RabbitMQBankTest
 {
     class RabbitMQBankTest
     {
-        static string SendQueueName = "group1_delegater_out";
+        static string SendQueueName = "group1_loanbroker_in";
         static string ReceiveQueueName = "group1_delegater_out";
 
         static void Main(string[] args)
@@ -19,7 +19,7 @@ namespace RabbitMQBankTest
             Console.WriteLine("\n\t<--Started sending messages!");
             for (int i = 0; i < messages; i++)
             {
-                Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = ((i + 1) * 10) });
+                Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = 100, Duration = 12, SSN = "123456-7890" });
                 Console.WriteLine("\t<--Messages sent: " + (i + 1) + "/" + messages);
             }
             Console.WriteLine("\t<--Stopped sending messages!\n");
@@ -35,6 +35,7 @@ namespace RabbitMQBankTest
                 string message = Encoding.UTF8.GetString(body);
                 Console.WriteLine("\t<--Message: " + message + " on queue: " + ea.RoutingKey);
             });
+            //Utility.HandleMessaging.SendMessage<LoanRequest>("group1_loanbroker_in", new LoanRequest() { Amount = 100, Duration = 12, SSN = "123456-7890" });
         }
     }
 }
