@@ -2,6 +2,7 @@
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
+using System.Threading;
 
 namespace RabbitMQBankTest
 {
@@ -18,7 +19,7 @@ namespace RabbitMQBankTest
             Console.WriteLine("\n\t<--Started sending messages!");
             for (int i = 0; i < messages; i++)
             {
-                Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = ((i + 1) * 10)});
+                Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = ((i + 1) * 10) });
                 Console.WriteLine("\t<--Messages sent: " + (i + 1) + "/" + messages);
             }
             Console.WriteLine("\t<--Stopped sending messages!\n");
@@ -27,13 +28,13 @@ namespace RabbitMQBankTest
             Console.ReadLine();
 
             Console.WriteLine("\n\t<--Started receiving messages!");
-            Utility.HandleMessaging.RecieveMessage(ReceiveQueueName, (BasicDeliverEventArgs ea) =>
+
+            var consumer = Utility.HandleMessaging.RecieveMessage(ReceiveQueueName, (object model, BasicDeliverEventArgs ea) =>
             {
                 byte[] body = ea.Body;
                 string message = Encoding.UTF8.GetString(body);
                 Console.WriteLine("\t<--Message: " + message + " on queue: " + ea.RoutingKey);
             });
-            Console.WriteLine("\t<--Stopped receiving messages!\n");
         }
     }
 }

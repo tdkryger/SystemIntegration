@@ -1,20 +1,21 @@
 ﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Resources;
-using Utility.Properties;
 using RabbitMQ.Client.Events;
+using System;
+using System.Text;
 
 namespace Utility
 {
+    /// <summary>
+    /// A static class that handles all messaging issues
+    /// </summary>
     public static class HandleMessaging
     {
         private static IModel channel = null;
 
+        /// <summary>
+        /// Gets the Channel (Singleton)
+        /// </summary>
         private static IModel Channel
         {
             get
@@ -23,6 +24,13 @@ namespace Utility
             }
         }
 
+        /// <summary>
+        /// Sends a message with the given type as the body, in the given queue
+        /// </summary>
+        /// <typeparam name="T">Type of object to send</typeparam>
+        /// <param name="queueName">The queue name to send the message to</param>
+        /// <param name="messageObject">The object to send</param>
+        /// <returns></returns>
         public static bool SendMessage<T>(string queueName, T messageObject)
         {
             bool result = true; ;
@@ -51,24 +59,29 @@ namespace Utility
             return result;
         }
 
-        public static void RecieveMessage(string queueName, Action<BasicDeliverEventArgs> method)
+        /// <summary>
+        /// Hooks the "method" method to "consumer.Recieve" eventhandler
+        /// </summary>
+        /// <param name="queueName">The queue name to recieve messages from</param>
+        /// <param name="method">The method to call when the declared queue recieves a message</param>
+        public static EventingBasicConsumer RecieveMessage(string queueName, EventHandler<BasicDeliverEventArgs> method)
         {
+            EventingBasicConsumer consumer;
+
             Channel.QueueDeclare(queue: queueName,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
                                  arguments: null);
 
-            EventingBasicConsumer consumer = new EventingBasicConsumer(Channel);
-
-            consumer.Received += (model, ea) =>
-            {
-                method(ea);
-            };
+            consumer = new EventingBasicConsumer(Channel);
+            consumer.Received += method;
 
             Channel.BasicConsume(queue: queueName,
                                  noAck: true,
                                  consumer: consumer);
+
+            return consumer;
         }
     }
 }
