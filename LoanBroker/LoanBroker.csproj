@@ -55,7 +55,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Links.txt" />
+    <Content Include="Documents\Links.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Documents\Component Diagram.uxf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
