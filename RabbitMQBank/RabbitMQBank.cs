@@ -62,8 +62,8 @@ namespace RabbitMQBank
             string message = Encoding.UTF8.GetString(inBody);
             Console.WriteLine(" [x] Received {0}", message);
 
-            using (var channel = connection.CreateModel())
-            {
+            //using (var channel = connection.CreateModel())
+            //{
 
 
                 //channel.QueueDeclare(queue: SendQueueName,
@@ -86,7 +86,7 @@ namespace RabbitMQBank
 
                 double sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
-                Utility.HandleMessaging.SendMessage<double>(channel, SendQueueName, sendMessage);
+                Utility.HandleMessaging.SendMessage<double>(SendQueueName, sendMessage);
 
                 //byte[] outBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
 
@@ -95,7 +95,7 @@ namespace RabbitMQBank
                 //                     basicProperties: null,
                 //                     body: outBody);
                 //Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
-            }
+            //}
         }
     }
 }
