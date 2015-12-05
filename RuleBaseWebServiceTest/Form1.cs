@@ -49,7 +49,7 @@ namespace RuleBaseWebServiceTest
         private void btnGet_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            RuleBaseInterface.Bank[] banks = rbsc.GetBanks();
+            RuleBaseInterface.Bank[] banks = rbsc.GetBanks(new RuleBaseInterface.LoanRequest() {Amount=10, CreditScore=500, Duration=17, SSN="123456-7890" } );
             foreach (RuleBaseInterface.Bank b in banks)
             {
                 listBox1.Items.Add(string.Format("ID: {0}, Name: {1}", b.Id, b.Name));

@@ -73,6 +73,96 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LoanRequest", Namespace="http://WorldOfRule.org/")]
+    [System.SerializableAttribute()]
+    public partial class LoanRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private int CreditScoreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SSNField;
+        
+        private decimal AmountField;
+        
+        private int DurationField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int CreditScore {
+            get {
+                return this.CreditScoreField;
+            }
+            set {
+                if ((this.CreditScoreField.Equals(value) != true)) {
+                    this.CreditScoreField = value;
+                    this.RaisePropertyChanged("CreditScore");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string SSN {
+            get {
+                return this.SSNField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SSNField, value) != true)) {
+                    this.SSNField = value;
+                    this.RaisePropertyChanged("SSN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public int Duration {
+            get {
+                return this.DurationField;
+            }
+            set {
+                if ((this.DurationField.Equals(value) != true)) {
+                    this.DurationField = value;
+                    this.RaisePropertyChanged("Duration");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://WorldOfRule.org/", ConfigurationName="RuleBaseInterface.RuleBaseSoap")]
     public interface RuleBaseSoap {
@@ -91,7 +181,7 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
         [System.ServiceModel.OperationContractAttribute(Action="http://WorldOfRule.org/RemoveABank", ReplyAction="*")]
         System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponse> RemoveABankAsync(RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest request);
         
-        // CODEGEN: Generating message contract since element name GetBanksResult from namespace http://WorldOfRule.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name loanRequest from namespace http://WorldOfRule.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://WorldOfRule.org/GetBanks", ReplyAction="*")]
         RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse GetBanks(RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest request);
         
@@ -241,10 +331,17 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://WorldOfRule.org/")]
     public partial class GetBanksRequestBody {
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public RuleBaseWebServiceTest.RuleBaseInterface.LoanRequest loanRequest;
+        
         public GetBanksRequestBody() {
+        }
+        
+        public GetBanksRequestBody(RuleBaseWebServiceTest.RuleBaseInterface.LoanRequest loanRequest) {
+            this.loanRequest = loanRequest;
         }
     }
     
@@ -362,9 +459,10 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
             return base.Channel.GetBanks(request);
         }
         
-        public RuleBaseWebServiceTest.RuleBaseInterface.Bank[] GetBanks() {
+        public RuleBaseWebServiceTest.RuleBaseInterface.Bank[] GetBanks(RuleBaseWebServiceTest.RuleBaseInterface.LoanRequest loanRequest) {
             RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest();
             inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequestBody();
+            inValue.Body.loanRequest = loanRequest;
             RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse retVal = ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseSoap)(this)).GetBanks(inValue);
             return retVal.Body.GetBanksResult;
         }
@@ -374,9 +472,10 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
             return base.Channel.GetBanksAsync(request);
         }
         
-        public System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse> GetBanksAsync() {
+        public System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse> GetBanksAsync(RuleBaseWebServiceTest.RuleBaseInterface.LoanRequest loanRequest) {
             RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest();
             inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequestBody();
+            inValue.Body.loanRequest = loanRequest;
             return ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseSoap)(this)).GetBanksAsync(inValue);
         }
     }
