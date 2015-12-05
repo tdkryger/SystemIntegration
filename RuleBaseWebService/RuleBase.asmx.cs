@@ -77,9 +77,15 @@ namespace RuleBaseWebService
         /// </summary>
         /// <returns>A list of banks, containing at least 1 bank, if we have any</returns>
         [WebMethod]
-        public List<LoanBroker.model.Bank> GetBanks(LoanBroker.model.LoanRequest loanRequest)
+        public List<LoanBroker.model.Bank> GetBanks(decimal amount, int creditScore, int duration, string ssn)
         {
-
+            LoanBroker.model.LoanRequest loanRequest = new LoanBroker.model.LoanRequest()
+            {
+                Amount=amount,
+                CreditScore= creditScore,
+                Duration=duration,
+                SSN=ssn
+            };
             if (_banks.Count == 0)
                 getPersistentList();
             Random rnd = new Random();
