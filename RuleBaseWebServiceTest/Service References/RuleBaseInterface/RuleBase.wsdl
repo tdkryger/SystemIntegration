@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://WorldOfRule.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://WorldOfRule.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://WorldOfRule.org/">
+      <s:element name="AddABank">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bank" type="tns:Bank" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Bank">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddABankResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveABank">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bank" type="tns:Bank" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveABankResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBanks">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBanksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBanksResult" type="tns:ArrayOfBank" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBank">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Bank" nillable="true" type="tns:Bank" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddABankSoapIn">
+    <wsdl:part name="parameters" element="tns:AddABank" />
+  </wsdl:message>
+  <wsdl:message name="AddABankSoapOut">
+    <wsdl:part name="parameters" element="tns:AddABankResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveABankSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveABank" />
+  </wsdl:message>
+  <wsdl:message name="RemoveABankSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveABankResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBanksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBanks" />
+  </wsdl:message>
+  <wsdl:message name="GetBanksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBanksResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RuleBaseSoap">
+    <wsdl:operation name="AddABank">
+      <wsdl:input message="tns:AddABankSoapIn" />
+      <wsdl:output message="tns:AddABankSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveABank">
+      <wsdl:input message="tns:RemoveABankSoapIn" />
+      <wsdl:output message="tns:RemoveABankSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <wsdl:input message="tns:GetBanksSoapIn" />
+      <wsdl:output message="tns:GetBanksSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RuleBaseSoap" type="tns:RuleBaseSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddABank">
+      <soap:operation soapAction="http://WorldOfRule.org/AddABank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveABank">
+      <soap:operation soapAction="http://WorldOfRule.org/RemoveABank" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <soap:operation soapAction="http://WorldOfRule.org/GetBanks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RuleBaseSoap12" type="tns:RuleBaseSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddABank">
+      <soap12:operation soapAction="http://WorldOfRule.org/AddABank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveABank">
+      <soap12:operation soapAction="http://WorldOfRule.org/RemoveABank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBanks">
+      <soap12:operation soapAction="http://WorldOfRule.org/GetBanks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RuleBase">
+    <wsdl:port name="RuleBaseSoap" binding="tns:RuleBaseSoap">
+      <soap:address location="http://localhost:55971/RuleBase.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RuleBaseSoap12" binding="tns:RuleBaseSoap12">
+      <soap12:address location="http://localhost:55971/RuleBase.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

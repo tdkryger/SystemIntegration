@@ -17,7 +17,28 @@ namespace RuleBaseWebService
     public class RuleBase : System.Web.Services.WebService
     {
         #region Private fields
+        // Static gets reset sometimes.. Need something better..
+        // Should use a HttpApplicationState Class (apparently) and a singleton..
         private static List<LoanBroker.model.Bank> _banks = new List<LoanBroker.model.Bank>();
+        #endregion
+
+        #region private methods
+        //Dunno if this works..
+        private void getPersistentList()
+        {
+            HttpApplicationState applicationState = HttpContext.Current.Application;
+            if (applicationState["BankList"] != null)
+            {
+                _banks = (List<LoanBroker.model.Bank>)applicationState["BankList"];
+            }
+        }
+
+        private void setPersistentList()
+        {
+            HttpApplicationState applicationState = HttpContext.Current.Application;
+            applicationState["BankList"] = _banks;
+        }
+
         #endregion
 
         /// <summary>
@@ -28,6 +49,7 @@ namespace RuleBaseWebService
         public void AddABank(LoanBroker.model.Bank bank)
         {
             _banks.Add(bank);
+            setPersistentList();
         }
 
         /// <summary>
@@ -40,6 +62,7 @@ namespace RuleBaseWebService
             try
             {
                 _banks.Remove(bank);
+                setPersistentList();
             }
             catch
             {
@@ -50,18 +73,21 @@ namespace RuleBaseWebService
         /// <summary>
         /// Creates a list of banks
         /// Right now the rule is random..
+        /// The Rule Base Fetcher have to add all the banks if the return list is empty, and make the request again
         /// </summary>
         /// <returns>A list of banks, containing at least 1 bank, if we have any</returns>
         [WebMethod]
         public List<LoanBroker.model.Bank> GetBanks()
         {
+            if (_banks.Count == 0)
+                getPersistentList();
             Random rnd = new Random();
             List<LoanBroker.model.Bank> banks = new List<LoanBroker.model.Bank>();
-            foreach(LoanBroker.model.Bank b in _banks)
+            foreach (LoanBroker.model.Bank b in _banks)
             {
                 //TODO: The rule goes here...
-                
-                if (rnd.Next(0, 1) == 1)
+
+                if (rnd.Next(0, 2) > 0) // rnd.Next(0, 1) only returns 0, as 1 is excluded max (says tooltip)
                 {
                     banks.Add(b);
                 }

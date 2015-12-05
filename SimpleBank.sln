@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseWebService", "RuleBaseWebService\RuleBaseWebService.csproj", "{4F7F670A-5259-424C-A921-FB972FA69278}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseWebServiceTest", "RuleBaseWebServiceTest\RuleBaseWebServiceTest.csproj", "{0A10B62A-9F51-474C-B446-9BBE7F368361}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4F7F670A-5259-424C-A921-FB972FA69278} = {4F7F670A-5259-424C-A921-FB972FA69278}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +74,10 @@ Global
 		{4F7F670A-5259-424C-A921-FB972FA69278}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F7F670A-5259-424C-A921-FB972FA69278}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F7F670A-5259-424C-A921-FB972FA69278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A10B62A-9F51-474C-B446-9BBE7F368361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A10B62A-9F51-474C-B446-9BBE7F368361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A10B62A-9F51-474C-B446-9BBE7F368361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A10B62A-9F51-474C-B446-9BBE7F368361}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
