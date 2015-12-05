@@ -14,11 +14,12 @@ namespace CreditScoreFetcher
 {
     public class Program
     {
-        private static string QUEUE_OUT = "group1_creditbureau_out";
         private static string QUEUE_IN = "group1_loanbroker_in";
+        private static string QUEUE_OUT = "group1_creditbureau_out";
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
             Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);

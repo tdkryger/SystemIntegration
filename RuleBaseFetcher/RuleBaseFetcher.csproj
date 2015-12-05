@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LoanBroker\LoanBroker.csproj">
+      <Project>{3a28c3d7-dc4f-4e06-b4bd-be4408bbc019}</Project>
+      <Name>LoanBroker</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{2f4585b1-779c-4093-86b8-290f69b93d6d}</Project>
       <Name>Utility</Name>
