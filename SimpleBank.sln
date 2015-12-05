@@ -29,6 +29,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseWebServiceTest", "R
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseFetcher", "RuleBaseFetcher\RuleBaseFetcher.csproj", "{54FE7A11-F0A8-4D1D-8CF5-5A18D0234430}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4F7F670A-5259-424C-A921-FB972FA69278} = {4F7F670A-5259-424C-A921-FB972FA69278}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

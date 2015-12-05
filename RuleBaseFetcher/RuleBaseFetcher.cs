@@ -13,6 +13,7 @@ namespace RuleBaseFetcher
 
         static void Main(string[] args)
         {
+
             Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, RabbitMQ.Client.Events.BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
@@ -20,9 +21,8 @@ namespace RuleBaseFetcher
                 LoanBroker.model.LoanRequest loanRequest;
 
 
-                //RuleBaseInterface.RuleBaseSoapClient ruleBase = new RuleBaseInterface.RuleBaseSoapClient();
-                //RuleBaseClient.RuleBaseSoapClient ruleBase = new RuleBaseClient.RuleBaseSoapClient();
-
+                localhost.RuleBase rb = new localhost.RuleBase();
+                
                 loanRequest = Newtonsoft.Json.JsonConvert.DeserializeObject<LoanBroker.model.LoanRequest>(Encoding.UTF8.GetString(ea.Body));
 
                 Console.WriteLine("<--Message content:");
@@ -31,24 +31,21 @@ namespace RuleBaseFetcher
 
                 //Something stupid going on here...
                 // Problems with type casting between the webservice's version of LoanBroker.model and the Fetcher's version of LoanBroker.model
-                // Look at http://www.codeproject.com/Articles/15967/How-to-Return-a-User-Defined-Object-from-Webservic
-                //Bank[] banks = ruleBase.GetBanks(new RuleBaseInterface.LoanRequest()
-                //{
-                //    Amount = loanRequest.Amount,
-                //    CreditScore = loanRequest.CreditScore,
-                //    Duration = loanRequest.Duration,
-                //    SSN = loanRequest.SSN
-                //});
-                // RuleBaseInterface.Bank[] tmpBanks = ruleBase.GetBanks(loanRequest.Amount, loanRequest.CreditScore, loanRequest.Duration, loanRequest.SSN);
+                localhost.Bank[] banks = rb.GetBanks(loanRequest.Amount, loanRequest.CreditScore, loanRequest.Duration, loanRequest.SSN);
+                List<LoanBroker.model.Bank> realBanks = new List<LoanBroker.model.Bank>();
+                foreach(localhost.Bank b in banks)
+                {
+                    realBanks.Add(new LoanBroker.model.Bank(b.Id, b.Name));
+                }
 
-                //loanRequest.CreditScore = service.creditScore(loanRequest.SSN);
+                //Console.WriteLine("<--Enriched message content:");
+                //Console.WriteLine("<--" + loanRequest);
 
-                Console.WriteLine("<--Enriched message content:");
-                Console.WriteLine("<--" + loanRequest);
-
+                //TODO: Figure out how to pass the list of banks AND the loanRequest down the line....
                 Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
                 Console.WriteLine();
-                // Utility.HandleMessaging.SendMessage<List<Bank>>(QUEUE_OUT, loanRequest);
+                Utility.HandleMessaging.SendMessage<List<LoanBroker.model.Bank>>(QUEUE_OUT, realBanks);
+                Utility.HandleMessaging.SendMessage<LoanBroker.model.LoanRequest>(QUEUE_OUT, loanRequest);
             });
         }
     }
