@@ -23,11 +23,11 @@ namespace LoanBroker.model
         /// <summary>
         /// ID of bank. We only have 4 banks, so valid values are 1 to 4
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get;  set; }
         /// <summary>
         /// A descriptive name for the bank
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get;  set; }
         #endregion
 
         #region Constructor
@@ -40,6 +40,12 @@ namespace LoanBroker.model
         {
             this.Id = id;
             this.Name = name;
+        }
+
+        public Bank()
+        {
+            this.Id = -1;
+            this.Name = string.Empty;
         }
         #endregion
     }
