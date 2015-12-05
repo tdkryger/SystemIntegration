@@ -77,15 +77,16 @@ namespace RuleBaseWebService
         /// </summary>
         /// <returns>A list of banks, containing at least 1 bank, if we have any</returns>
         [WebMethod]
-        public List<LoanBroker.model.Bank> GetBanks()
+        public List<LoanBroker.model.Bank> GetBanks(LoanBroker.model.LoanRequest loanRequest)
         {
+
             if (_banks.Count == 0)
                 getPersistentList();
             Random rnd = new Random();
             List<LoanBroker.model.Bank> banks = new List<LoanBroker.model.Bank>();
             foreach (LoanBroker.model.Bank b in _banks)
             {
-                //TODO: The rule goes here...
+                //TODO: The rule goes here... use the loanRequest obkject..
 
                 if (rnd.Next(0, 2) > 0) // rnd.Next(0, 1) only returns 0, as 1 is excluded max (says tooltip)
                 {
