@@ -49,7 +49,7 @@ namespace Utility
             {
                 Console.WriteLine(" An error occured: ");
                 Console.WriteLine(e.Message);
-                Console.WriteLine(" No message has ben sent. ");
+                Console.WriteLine(" No message has been sent. ");
                 result = false;
             }
 

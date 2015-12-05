@@ -14,46 +14,32 @@ namespace CreditScoreFetcher
 {
     public class Program
     {
-        //static IModel SendChannel;
-        static IModel ReceiveChannel;
-        static IConnection connection;
+        private static string QUEUE_OUT = "group1_creditbureau_out";
+        private static string QUEUE_IN = "group1_loanbroker_in";
 
-        static string SendQueueName = "OurSendBankQueue";
-        static string ReceiveQueueName = "OurRecieveBankQueue";
         static void Main(string[] args)
         {
-            var factory = new ConnectionFactory()
+            Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
             {
-                HostName = "datdb.cphbusiness.dk"
-            };
+                Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
 
-            using (connection = factory.CreateConnection())
-            {
-                using (ReceiveChannel = connection.CreateModel())
-                {
+                LoanRequest loanRequest;
 
-                    ReceiveChannel.QueueDeclare(queue: ReceiveQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                CreditScoreService.CreditScoreServiceClient service = new CreditScoreService.CreditScoreServiceClient();
+                loanRequest = JsonConvert.DeserializeObject<LoanRequest>(Encoding.UTF8.GetString(ea.Body));
 
-                    var consumer = new EventingBasicConsumer(ReceiveChannel);
+                Console.WriteLine("<--Message content:");
+                Console.WriteLine("<--" + loanRequest);
 
-                    consumer.Received += (model, ea) =>
-                    {
-                        byte[] body = ea.Body;
-                        string message = Encoding.UTF8.GetString(body);
-                        string jObject = JsonConvert.SerializeObject(message);
-                        LoanRequest lr = JsonConvert.DeserializeObject<LoanRequest>(jObject);
-                        lr.CreditScore = CreditBureau.GetCreditScore(lr.SSN);
-                        Console.WriteLine(" [x] Received {0}", message);
-                    };
+                loanRequest.CreditScore = service.creditScore(loanRequest.SSN);
 
-                    ReceiveChannel.BasicConsume(queue: ReceiveQueueName, noAck: true, consumer: consumer);
+                Console.WriteLine("<--Enriched message content:");
+                Console.WriteLine("<--" + loanRequest);
 
-                    Console.WriteLine(" Press [enter] to exit.");
-                    Console.ReadLine();
-                }
-            }
+                Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
+                Console.WriteLine();
+                Utility.HandleMessaging.SendMessage<LoanRequest>(QUEUE_OUT, loanRequest);
+            });
         }
-
-        
     }
 }
