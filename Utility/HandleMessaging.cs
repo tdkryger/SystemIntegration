@@ -11,7 +11,7 @@ namespace Utility
     /// </summary>
     public static class HandleMessaging
     {
-        private static IModel channel = null;
+        private static IModel _channel = null;
 
         /// <summary>
         /// Gets the Channel (Singleton)
@@ -20,7 +20,7 @@ namespace Utility
         {
             get
             {
-                return channel == null ? new ConnectionFactory() { HostName = "datdb.cphbusiness.dk" }.CreateConnection().CreateModel() : channel;
+                return _channel == null ? new ConnectionFactory() { HostName = "datdb.cphbusiness.dk" }.CreateConnection().CreateModel() : _channel;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Utility
 
             try
             {
-                channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
+                Channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
 
                 string jSonString = JsonConvert.SerializeObject(messageObject);
                 byte[] body = Encoding.UTF8.GetBytes(jSonString);
@@ -124,13 +124,13 @@ namespace Utility
         /// <param name="routingKey">the routing key</param>
         /// <param name="method">The method to call when the declared queue recieves a message</param>
         /// /// <param name="exchangeType">Type of exchange. Defaults to direct</param>
-        public static EventingBasicConsumer RecieveMessage((string queueName, string exchangeName, string routingKey, EventHandler<BasicDeliverEventArgs> method, string exchangeType = "direct")
+        public static EventingBasicConsumer RecieveMessage(string queueName, string exchangeName, string routingKey, EventHandler<BasicDeliverEventArgs> method, string exchangeType = "direct")
         {
             EventingBasicConsumer consumer;
 
-            channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
+            Channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
             Channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
-            channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: routingKey);
+            Channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: routingKey);
             consumer = new EventingBasicConsumer(Channel);
             consumer.Received += method;
             Channel.BasicConsume(queue: queueName, noAck: true, consumer: consumer);
