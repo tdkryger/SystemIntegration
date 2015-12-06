@@ -212,7 +212,8 @@ Translator</panel_attributes>
     <panel_attributes>symbol=component
 bg=green
 
-Delegater</panel_attributes>
+Delegater
+(Recipient List)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
