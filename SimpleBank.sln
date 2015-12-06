@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseWebServiceTest", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipientList", "RecipientList\RecipientList.csproj", "{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalTranslator", "UniversalTranslator\UniversalTranslator.csproj", "{4FC1D2EA-3A0E-4808-AEFC-6BCD025DC879}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC1D2EA-3A0E-4808-AEFC-6BCD025DC879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC1D2EA-3A0E-4808-AEFC-6BCD025DC879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC1D2EA-3A0E-4808-AEFC-6BCD025DC879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC1D2EA-3A0E-4808-AEFC-6BCD025DC879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

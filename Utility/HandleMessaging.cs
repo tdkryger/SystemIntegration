@@ -92,6 +92,37 @@ namespace Utility
         }
 
         /// <summary>
+        /// Sends a message with the given type as the body, in the given queue
+        /// </summary>
+        /// <param name="exchangeName">The name of the exchange</param>
+        /// <param name="exchangeType">Type of exchange. Defaults to direct</param>
+        /// <param name="messageString">The message to send</param>
+        /// <param name="routingKey">the routing key</param>
+        /// <returns></returns>
+        public static bool SendMessage(string exchangeName, string routingKey, string messageString, string exchangeType = "direct")
+        {
+            bool result = true; ;
+
+            try
+            {
+                Channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
+
+                byte[] body = Encoding.UTF8.GetBytes(messageString);
+
+                Channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: body);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(" An error occured: ");
+                Console.WriteLine(e.Message);
+                Console.WriteLine(" No message has been sent. ");
+                result = false;
+            }
+            return result;
+        }
+
+
+        /// <summary>
         /// Hooks the "method" method to "consumer.Recieve" eventhandler
         /// </summary>
         /// <param name="queueName">The queue name to recieve messages from</param>
