@@ -29,7 +29,7 @@ namespace RuleBaseFetcher
                 Console.WriteLine("<--" + loanRequest);
 
 
-                //Something stupid going on here...
+                //Something stupid going on here...  
                 // Problems with type casting between the webservice's version of LoanBroker.model and the Fetcher's version of LoanBroker.model
                 localhost.Bank[] banks = rb.GetBanks(loanRequest.Amount, loanRequest.CreditScore, loanRequest.Duration, loanRequest.SSN);
                 List<LoanBroker.model.Bank> realBanks = new List<LoanBroker.model.Bank>();
