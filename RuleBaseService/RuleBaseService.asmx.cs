@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using LoanBroker.model;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Services;
 
@@ -19,6 +21,45 @@ namespace RuleBaseService
         // Should use a HttpApplicationState Class (apparently) and a singleton..
         private static List<string> _banks = new List<string>();
         #endregion
+
+        public RuleBaseService() : base()
+        {
+            Bank bank0, bank1, bank2, bank3;
+
+            bank0 = new Bank()
+            {
+                Id = 0,
+                Name = "Bank0",
+            };
+
+            bank1 = new Bank()
+            {
+                Id = 1,
+                Name = "Bank1",
+                MinAmount = 123
+            };
+
+            bank2 = new Bank()
+            {
+                Id = 2,
+                Name = "Bank2",
+                MinCreditScore = 678
+            };
+
+            bank3 = new Bank()
+            {
+                Id = 3,
+                Name = "Bank3",
+                MinAmount = 100,
+                MinDuration = 12,
+                MinCreditScore = 234
+            };
+
+            AddABank(JsonConvert.SerializeObject(bank0));
+            AddABank(JsonConvert.SerializeObject(bank1));
+            AddABank(JsonConvert.SerializeObject(bank2));
+            AddABank(JsonConvert.SerializeObject(bank3));
+        }
 
         #region private methods
         //Dunno if this works..
