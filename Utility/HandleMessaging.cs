@@ -119,16 +119,16 @@ namespace Utility
         /// <summary>
         /// Hooks the "method" method to "consumer.Recieve" eventhandler
         /// </summary>
-        /// <param name="queueName">The queue name to recieve messages from</param>
         /// <param name="exchangeName">The name of the exchange</param>
         /// <param name="routingKey">the routing key</param>
         /// <param name="method">The method to call when the declared queue recieves a message</param>
         /// /// <param name="exchangeType">Type of exchange. Defaults to direct</param>
-        public static EventingBasicConsumer RecieveMessage(string queueName, string exchangeName, string routingKey, EventHandler<BasicDeliverEventArgs> method, string exchangeType = "direct")
+        public static EventingBasicConsumer RecieveMessage(string exchangeName, string routingKey, EventHandler<BasicDeliverEventArgs> method, string exchangeType = "direct")
         {
             EventingBasicConsumer consumer;
-
+            
             Channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
+            string queueName = Channel.QueueDeclare().QueueName;
             Channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
             Channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: routingKey);
             consumer = new EventingBasicConsumer(Channel);
