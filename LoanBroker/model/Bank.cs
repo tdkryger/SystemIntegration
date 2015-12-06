@@ -30,7 +30,12 @@ namespace LoanBroker.model
         /// </summary>
         public string Name { get; set; }
 
-        public int MinCreditRating { get; set; }
+        public int MinCreditScore { get; set; }
+        public int MaxCreditScore { get; set; }
+        public Decimal MinAmount { get; set; }
+        public Decimal MaxAmount { get; set; }
+        public int MinDuration { get; set; }
+        public int MaxDuration { get; set; }
         #endregion
 
         #region Constructor
@@ -49,6 +54,12 @@ namespace LoanBroker.model
         {
             this.Id = -1;
             this.Name = string.Empty;
+            this.MinCreditScore = 0;
+            this.MaxCreditScore = 800;
+            this.MinAmount = 0;
+            this.MaxAmount = Int32.MaxValue;
+            this.MinDuration = 1;
+            this.MaxDuration = Int32.MaxValue;
         }
         #endregion
     }
