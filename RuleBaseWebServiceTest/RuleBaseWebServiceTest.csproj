@@ -35,6 +35,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -76,6 +80,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -85,11 +90,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\RuleBaseInterface\RuleBase.wsdl" />
+    <None Include="Service References\RuleBaseInterface\RuleBaseService.wsdl" />
     <None Include="Service References\RuleBaseInterface\RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\RuleBaseInterface\RuleBaseWebServiceTest.RuleBaseInterface.Bank.datasource">
+    <None Include="Service References\RuleBaseInterface\RuleBaseWebServiceTest.RuleBaseInterface.ArrayOfString.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\RuleBaseInterface\RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse.datasource">
@@ -103,10 +108,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LoanBroker\LoanBroker.csproj">
+      <Project>{3a28c3d7-dc4f-4e06-b4bd-be4408bbc019}</Project>
+      <Name>LoanBroker</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Service References\RuleBaseInterface\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\RuleBaseInterface\RuleBase.disco" />
+    <None Include="Service References\RuleBaseInterface\RuleBaseService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\RuleBaseInterface\configuration91.svcinfo" />
@@ -119,12 +130,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LoanBroker\LoanBroker.csproj">
-      <Project>{3a28c3d7-dc4f-4e06-b4bd-be4408bbc019}</Project>
-      <Name>LoanBroker</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

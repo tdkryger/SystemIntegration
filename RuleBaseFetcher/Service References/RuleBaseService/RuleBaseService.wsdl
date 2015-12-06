@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://WorldOfRule.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://WorldOfRule.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://WorldOfRule.org/">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="AddABank">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="bank" type="tns:Bank" />
+            <s:element minOccurs="0" maxOccurs="1" name="jSonRepOfBank" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="Bank">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="AddABankResponse">
         <s:complexType />
       </s:element>
       <s:element name="RemoveABank">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="bank" type="tns:Bank" />
+            <s:element minOccurs="0" maxOccurs="1" name="jSonRepOfBank" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -29,25 +23,18 @@
         <s:complexType />
       </s:element>
       <s:element name="GetBanks">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="amount" type="s:decimal" />
-            <s:element minOccurs="1" maxOccurs="1" name="creditScore" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="duration" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="ssn" type="s:string" />
-          </s:sequence>
-        </s:complexType>
+        <s:complexType />
       </s:element>
       <s:element name="GetBanksResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetBanksResult" type="tns:ArrayOfBank" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetBanksResult" type="tns:ArrayOfString" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfBank">
+      <s:complexType name="ArrayOfString">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Bank" nillable="true" type="tns:Bank" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -70,7 +57,7 @@
   <wsdl:message name="GetBanksSoapOut">
     <wsdl:part name="parameters" element="tns:GetBanksResponse" />
   </wsdl:message>
-  <wsdl:portType name="RuleBaseSoap">
+  <wsdl:portType name="RuleBaseServiceSoap">
     <wsdl:operation name="AddABank">
       <wsdl:input message="tns:AddABankSoapIn" />
       <wsdl:output message="tns:AddABankSoapOut" />
@@ -84,10 +71,10 @@
       <wsdl:output message="tns:GetBanksSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="RuleBaseSoap" type="tns:RuleBaseSoap">
+  <wsdl:binding name="RuleBaseServiceSoap" type="tns:RuleBaseServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AddABank">
-      <soap:operation soapAction="http://WorldOfRule.org/AddABank" style="document" />
+      <soap:operation soapAction="http://tempuri.org/AddABank" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -96,7 +83,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="RemoveABank">
-      <soap:operation soapAction="http://WorldOfRule.org/RemoveABank" style="document" />
+      <soap:operation soapAction="http://tempuri.org/RemoveABank" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -105,7 +92,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetBanks">
-      <soap:operation soapAction="http://WorldOfRule.org/GetBanks" style="document" />
+      <soap:operation soapAction="http://tempuri.org/GetBanks" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -114,10 +101,10 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="RuleBaseSoap12" type="tns:RuleBaseSoap">
+  <wsdl:binding name="RuleBaseServiceSoap12" type="tns:RuleBaseServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AddABank">
-      <soap12:operation soapAction="http://WorldOfRule.org/AddABank" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/AddABank" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -126,7 +113,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="RemoveABank">
-      <soap12:operation soapAction="http://WorldOfRule.org/RemoveABank" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/RemoveABank" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -135,7 +122,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetBanks">
-      <soap12:operation soapAction="http://WorldOfRule.org/GetBanks" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/GetBanks" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -144,12 +131,12 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="RuleBase">
-    <wsdl:port name="RuleBaseSoap" binding="tns:RuleBaseSoap">
-      <soap:address location="http://localhost:55971/RuleBase.asmx" />
+  <wsdl:service name="RuleBaseService">
+    <wsdl:port name="RuleBaseServiceSoap" binding="tns:RuleBaseServiceSoap">
+      <soap:address location="http://localhost:50854/RuleBaseService.asmx" />
     </wsdl:port>
-    <wsdl:port name="RuleBaseSoap12" binding="tns:RuleBaseSoap12">
-      <soap12:address location="http://localhost:55971/RuleBase.asmx" />
+    <wsdl:port name="RuleBaseServiceSoap12" binding="tns:RuleBaseServiceSoap12">
+      <soap12:address location="http://localhost:50854/RuleBaseService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

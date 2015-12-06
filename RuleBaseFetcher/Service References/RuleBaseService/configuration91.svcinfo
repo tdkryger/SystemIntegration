@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="AiRCyYWbwRro+a4/ckNuyvcqUWQ=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="SYNeORx0ktPIzBiomu5kXbrVx8k=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="RuleBaseServiceSoap">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="RuleBaseServiceSoap" contract="RuleBaseInterface.RuleBaseServiceSoap" bindingType="basicHttpBinding" address="http://localhost:50854/RuleBaseService.asmx" bindingConfiguration="RuleBaseServiceSoap">
+    <endpoint name="RuleBaseServiceSoap" contract="RuleBaseService.RuleBaseServiceSoap" bindingType="basicHttpBinding" address="http://localhost:50854/RuleBaseService.asmx" bindingConfiguration="RuleBaseServiceSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:50854/RuleBaseService.asmx</serializedValue>
@@ -127,7 +127,7 @@
           <serializedValue>RuleBaseServiceSoap</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>RuleBaseInterface.RuleBaseServiceSoap</serializedValue>
+          <serializedValue>RuleBaseService.RuleBaseServiceSoap</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

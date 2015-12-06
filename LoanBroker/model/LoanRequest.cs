@@ -13,6 +13,7 @@ namespace LoanBroker.model
         public string SSN { get; set; }
         public decimal Amount { get; set; }
         public int Duration { get; set; }
+        public List<Bank> Banks { get; set; }
 
         public override string ToString()
         {

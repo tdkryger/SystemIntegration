@@ -1,11 +1,10 @@
 ﻿using LoanBroker.model;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
+using RuleBaseFetcher.RuleBaseService;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RuleBaseFetcher
 {
@@ -27,9 +26,29 @@ namespace RuleBaseFetcher
 
                 Console.WriteLine("<--Message content:");
                 Console.WriteLine("<--" + loanRequest);
+                
+                RuleBaseService.RuleBaseServiceSoapClient service;
+                ArrayOfString strings;
 
-                // Add enrichment code beneath here
+                service = new RuleBaseService.RuleBaseServiceSoapClient();
+                loanRequest.Banks = new List<Bank>();
+                strings = service.GetBanks();
 
+                foreach (string jSonRepOfBank in strings)
+                {
+                    Bank bank;
+                    bank = JsonConvert.DeserializeObject<Bank>(jSonRepOfBank);
+
+                    if (loanRequest.CreditScore >= bank.MinCreditScore &&
+                        loanRequest.CreditScore <= bank.MaxCreditScore &&
+                        loanRequest.Amount >= bank.MinAmount &&
+                        loanRequest.Amount <= bank.MaxAmount &&
+                        loanRequest.Duration >= bank.MinDuration &&
+                        loanRequest.Duration <= bank.MaxDuration)
+                    {
+                        loanRequest.Banks.Add(bank);
+                    }
+                }
 
                 Console.WriteLine("<--Enriched message content:");
                 Console.WriteLine("<--" + loanRequest);

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Services;
 
@@ -19,7 +17,7 @@ namespace RuleBaseService
         #region Private fields
         // Static gets reset sometimes.. Need something better..
         // Should use a HttpApplicationState Class (apparently) and a singleton..
-        private static List<LoanBroker.model.Bank> _banks = new List<LoanBroker.model.Bank>();
+        private static List<string> _banks = new List<string>();
         #endregion
 
         #region private methods
@@ -29,7 +27,7 @@ namespace RuleBaseService
             HttpApplicationState applicationState = HttpContext.Current.Application;
             if (applicationState["BankList"] != null)
             {
-                _banks = (List<LoanBroker.model.Bank>)applicationState["BankList"];
+                _banks = (List<string>)applicationState["BankList"];
             }
         }
 
@@ -46,9 +44,9 @@ namespace RuleBaseService
         /// </summary>
         /// <param name="bank">The bank to add</param>
         [WebMethod]
-        public void AddABank(LoanBroker.model.Bank bank)
+        public void AddABank(string jSonRepOfBank)
         {
-            _banks.Add(bank);
+            _banks.Add(jSonRepOfBank);
             setPersistentList();
         }
 
@@ -57,11 +55,11 @@ namespace RuleBaseService
         /// </summary>
         /// <param name="bank">The bank to remove</param>
         [WebMethod]
-        public void RemoveABank(LoanBroker.model.Bank bank)
+        public void RemoveABank(string jSonRepOfBank)
         {
             try
             {
-                _banks.Remove(bank);
+                _banks.Remove(jSonRepOfBank);
                 setPersistentList();
             }
             catch
@@ -71,48 +69,15 @@ namespace RuleBaseService
         }
 
         /// <summary>
-        /// Creates a list of banks
-        /// Right now the rule is random..
+        /// Returns the list of banks
         /// The Rule Base Fetcher have to add all the banks if the return list is empty, and make the request again
         /// </summary>
-        /// <returns>A list of banks, containing at least 1 bank, if we have any</returns>
+        /// <returns>A list of banks</returns>
         [WebMethod]
-        public List<LoanBroker.model.Bank> GetBanks(decimal amount, int creditScore, int duration, string ssn)
+        public string[] GetBanks()
         {
-            LoanBroker.model.LoanRequest loanRequest = new LoanBroker.model.LoanRequest()
-            {
-                Amount = amount,
-                CreditScore = creditScore,
-                Duration = duration,
-                SSN = ssn
-            };
-            if (_banks.Count == 0)
-                getPersistentList();
-            Random rnd = new Random();
-            List<LoanBroker.model.Bank> banks = new List<LoanBroker.model.Bank>();
-            foreach (LoanBroker.model.Bank b in _banks)
-            {
-                //TODO: The rule goes here... use the loanRequest obkject..
-
-                if (rnd.Next(0, 2) > 0) // rnd.Next(0, 1) only returns 0, as 1 is excluded max (says tooltip)
-                {
-                    banks.Add(b);
-                }
-            }
-            // Make sure we atleast a bank, if we have any banks to choose from..
-            if (banks.Count == 0 && _banks.Count > 0)
-            {
-                int idx = rnd.Next(0, _banks.Count - 1);
-                try
-                {
-                    banks.Add(_banks[idx]);
-                }
-                catch
-                {
-                    banks.Add(_banks[0]);
-                }
-            }
-            return banks;
+            getPersistentList();
+            return _banks.ToArray();
         }
     }
 }

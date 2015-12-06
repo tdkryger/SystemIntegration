@@ -22,10 +22,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{2F4585B1-779C-4093-86B8-290F69B93D6D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseFetcher", "RuleBaseFetcher\RuleBaseFetcher.csproj", "{47BC8C5A-A201-484B-A952-EC18A7D321D0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E27E5A5E-945F-40A4-970A-EC4D2BDCF4EB} = {E27E5A5E-945F-40A4-970A-EC4D2BDCF4EB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseService", "RuleBaseService\RuleBaseService.csproj", "{E27E5A5E-945F-40A4-970A-EC4D2BDCF4EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseWebServiceTest", "RuleBaseWebServiceTest\RuleBaseWebServiceTest.csproj", "{0A10B62A-9F51-474C-B446-9BBE7F368361}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E27E5A5E-945F-40A4-970A-EC4D2BDCF4EB} = {E27E5A5E-945F-40A4-970A-EC4D2BDCF4EB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

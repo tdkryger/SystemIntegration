@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RuleBaseWebServiceTest.RuleBaseInterface {
+namespace RuleBaseFetcher.RuleBaseService {
     using System.Runtime.Serialization;
     using System;
     
@@ -21,29 +21,29 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RuleBaseInterface.RuleBaseServiceSoap")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RuleBaseService.RuleBaseServiceSoap")]
     public interface RuleBaseServiceSoap {
         
         // CODEGEN: Generating message contract since element name jSonRepOfBank from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddABank", ReplyAction="*")]
-        RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponse AddABank(RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest request);
+        RuleBaseFetcher.RuleBaseService.AddABankResponse AddABank(RuleBaseFetcher.RuleBaseService.AddABankRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddABank", ReplyAction="*")]
-        System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponse> AddABankAsync(RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest request);
+        System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.AddABankResponse> AddABankAsync(RuleBaseFetcher.RuleBaseService.AddABankRequest request);
         
         // CODEGEN: Generating message contract since element name jSonRepOfBank from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/RemoveABank", ReplyAction="*")]
-        RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponse RemoveABank(RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest request);
+        RuleBaseFetcher.RuleBaseService.RemoveABankResponse RemoveABank(RuleBaseFetcher.RuleBaseService.RemoveABankRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/RemoveABank", ReplyAction="*")]
-        System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponse> RemoveABankAsync(RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest request);
+        System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.RemoveABankResponse> RemoveABankAsync(RuleBaseFetcher.RuleBaseService.RemoveABankRequest request);
         
         // CODEGEN: Generating message contract since element name GetBanksResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBanks", ReplyAction="*")]
-        RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse GetBanks(RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest request);
+        RuleBaseFetcher.RuleBaseService.GetBanksResponse GetBanks(RuleBaseFetcher.RuleBaseService.GetBanksRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBanks", ReplyAction="*")]
-        System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse> GetBanksAsync(RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest request);
+        System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.GetBanksResponse> GetBanksAsync(RuleBaseFetcher.RuleBaseService.GetBanksRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -53,12 +53,12 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     public partial class AddABankRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddABank", Namespace="http://tempuri.org/", Order=0)]
-        public RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequestBody Body;
+        public RuleBaseFetcher.RuleBaseService.AddABankRequestBody Body;
         
         public AddABankRequest() {
         }
         
-        public AddABankRequest(RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequestBody Body) {
+        public AddABankRequest(RuleBaseFetcher.RuleBaseService.AddABankRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -87,12 +87,12 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     public partial class AddABankResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddABankResponse", Namespace="http://tempuri.org/", Order=0)]
-        public RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponseBody Body;
+        public RuleBaseFetcher.RuleBaseService.AddABankResponseBody Body;
         
         public AddABankResponse() {
         }
         
-        public AddABankResponse(RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponseBody Body) {
+        public AddABankResponse(RuleBaseFetcher.RuleBaseService.AddABankResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -114,12 +114,12 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     public partial class RemoveABankRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoveABank", Namespace="http://tempuri.org/", Order=0)]
-        public RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequestBody Body;
+        public RuleBaseFetcher.RuleBaseService.RemoveABankRequestBody Body;
         
         public RemoveABankRequest() {
         }
         
-        public RemoveABankRequest(RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequestBody Body) {
+        public RemoveABankRequest(RuleBaseFetcher.RuleBaseService.RemoveABankRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -148,12 +148,12 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     public partial class RemoveABankResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="RemoveABankResponse", Namespace="http://tempuri.org/", Order=0)]
-        public RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponseBody Body;
+        public RuleBaseFetcher.RuleBaseService.RemoveABankResponseBody Body;
         
         public RemoveABankResponse() {
         }
         
-        public RemoveABankResponse(RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponseBody Body) {
+        public RemoveABankResponse(RuleBaseFetcher.RuleBaseService.RemoveABankResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -175,12 +175,12 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     public partial class GetBanksRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBanks", Namespace="http://tempuri.org/", Order=0)]
-        public RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequestBody Body;
+        public RuleBaseFetcher.RuleBaseService.GetBanksRequestBody Body;
         
         public GetBanksRequest() {
         }
         
-        public GetBanksRequest(RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequestBody Body) {
+        public GetBanksRequest(RuleBaseFetcher.RuleBaseService.GetBanksRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -202,12 +202,12 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     public partial class GetBanksResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBanksResponse", Namespace="http://tempuri.org/", Order=0)]
-        public RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponseBody Body;
+        public RuleBaseFetcher.RuleBaseService.GetBanksResponseBody Body;
         
         public GetBanksResponse() {
         }
         
-        public GetBanksResponse(RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponseBody Body) {
+        public GetBanksResponse(RuleBaseFetcher.RuleBaseService.GetBanksResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -219,23 +219,23 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
     public partial class GetBanksResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public RuleBaseWebServiceTest.RuleBaseInterface.ArrayOfString GetBanksResult;
+        public RuleBaseFetcher.RuleBaseService.ArrayOfString GetBanksResult;
         
         public GetBanksResponseBody() {
         }
         
-        public GetBanksResponseBody(RuleBaseWebServiceTest.RuleBaseInterface.ArrayOfString GetBanksResult) {
+        public GetBanksResponseBody(RuleBaseFetcher.RuleBaseService.ArrayOfString GetBanksResult) {
             this.GetBanksResult = GetBanksResult;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface RuleBaseServiceSoapChannel : RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap, System.ServiceModel.IClientChannel {
+    public interface RuleBaseServiceSoapChannel : RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class RuleBaseServiceSoapClient : System.ServiceModel.ClientBase<RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap>, RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap {
+    public partial class RuleBaseServiceSoapClient : System.ServiceModel.ClientBase<RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap>, RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap {
         
         public RuleBaseServiceSoapClient() {
         }
@@ -257,74 +257,74 @@ namespace RuleBaseWebServiceTest.RuleBaseInterface {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponse RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap.AddABank(RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest request) {
+        RuleBaseFetcher.RuleBaseService.AddABankResponse RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap.AddABank(RuleBaseFetcher.RuleBaseService.AddABankRequest request) {
             return base.Channel.AddABank(request);
         }
         
         public void AddABank(string jSonRepOfBank) {
-            RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest();
-            inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequestBody();
+            RuleBaseFetcher.RuleBaseService.AddABankRequest inValue = new RuleBaseFetcher.RuleBaseService.AddABankRequest();
+            inValue.Body = new RuleBaseFetcher.RuleBaseService.AddABankRequestBody();
             inValue.Body.jSonRepOfBank = jSonRepOfBank;
-            RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponse retVal = ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap)(this)).AddABank(inValue);
+            RuleBaseFetcher.RuleBaseService.AddABankResponse retVal = ((RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap)(this)).AddABank(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponse> RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap.AddABankAsync(RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest request) {
+        System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.AddABankResponse> RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap.AddABankAsync(RuleBaseFetcher.RuleBaseService.AddABankRequest request) {
             return base.Channel.AddABankAsync(request);
         }
         
-        public System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.AddABankResponse> AddABankAsync(string jSonRepOfBank) {
-            RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequest();
-            inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.AddABankRequestBody();
+        public System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.AddABankResponse> AddABankAsync(string jSonRepOfBank) {
+            RuleBaseFetcher.RuleBaseService.AddABankRequest inValue = new RuleBaseFetcher.RuleBaseService.AddABankRequest();
+            inValue.Body = new RuleBaseFetcher.RuleBaseService.AddABankRequestBody();
             inValue.Body.jSonRepOfBank = jSonRepOfBank;
-            return ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap)(this)).AddABankAsync(inValue);
+            return ((RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap)(this)).AddABankAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponse RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap.RemoveABank(RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest request) {
+        RuleBaseFetcher.RuleBaseService.RemoveABankResponse RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap.RemoveABank(RuleBaseFetcher.RuleBaseService.RemoveABankRequest request) {
             return base.Channel.RemoveABank(request);
         }
         
         public void RemoveABank(string jSonRepOfBank) {
-            RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest();
-            inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequestBody();
+            RuleBaseFetcher.RuleBaseService.RemoveABankRequest inValue = new RuleBaseFetcher.RuleBaseService.RemoveABankRequest();
+            inValue.Body = new RuleBaseFetcher.RuleBaseService.RemoveABankRequestBody();
             inValue.Body.jSonRepOfBank = jSonRepOfBank;
-            RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponse retVal = ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap)(this)).RemoveABank(inValue);
+            RuleBaseFetcher.RuleBaseService.RemoveABankResponse retVal = ((RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap)(this)).RemoveABank(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponse> RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap.RemoveABankAsync(RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest request) {
+        System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.RemoveABankResponse> RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap.RemoveABankAsync(RuleBaseFetcher.RuleBaseService.RemoveABankRequest request) {
             return base.Channel.RemoveABankAsync(request);
         }
         
-        public System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankResponse> RemoveABankAsync(string jSonRepOfBank) {
-            RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequest();
-            inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.RemoveABankRequestBody();
+        public System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.RemoveABankResponse> RemoveABankAsync(string jSonRepOfBank) {
+            RuleBaseFetcher.RuleBaseService.RemoveABankRequest inValue = new RuleBaseFetcher.RuleBaseService.RemoveABankRequest();
+            inValue.Body = new RuleBaseFetcher.RuleBaseService.RemoveABankRequestBody();
             inValue.Body.jSonRepOfBank = jSonRepOfBank;
-            return ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap)(this)).RemoveABankAsync(inValue);
+            return ((RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap)(this)).RemoveABankAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap.GetBanks(RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest request) {
+        RuleBaseFetcher.RuleBaseService.GetBanksResponse RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap.GetBanks(RuleBaseFetcher.RuleBaseService.GetBanksRequest request) {
             return base.Channel.GetBanks(request);
         }
         
-        public RuleBaseWebServiceTest.RuleBaseInterface.ArrayOfString GetBanks() {
-            RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest();
-            inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequestBody();
-            RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse retVal = ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap)(this)).GetBanks(inValue);
+        public RuleBaseFetcher.RuleBaseService.ArrayOfString GetBanks() {
+            RuleBaseFetcher.RuleBaseService.GetBanksRequest inValue = new RuleBaseFetcher.RuleBaseService.GetBanksRequest();
+            inValue.Body = new RuleBaseFetcher.RuleBaseService.GetBanksRequestBody();
+            RuleBaseFetcher.RuleBaseService.GetBanksResponse retVal = ((RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap)(this)).GetBanks(inValue);
             return retVal.Body.GetBanksResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse> RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap.GetBanksAsync(RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest request) {
+        System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.GetBanksResponse> RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap.GetBanksAsync(RuleBaseFetcher.RuleBaseService.GetBanksRequest request) {
             return base.Channel.GetBanksAsync(request);
         }
         
-        public System.Threading.Tasks.Task<RuleBaseWebServiceTest.RuleBaseInterface.GetBanksResponse> GetBanksAsync() {
-            RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest inValue = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequest();
-            inValue.Body = new RuleBaseWebServiceTest.RuleBaseInterface.GetBanksRequestBody();
-            return ((RuleBaseWebServiceTest.RuleBaseInterface.RuleBaseServiceSoap)(this)).GetBanksAsync(inValue);
+        public System.Threading.Tasks.Task<RuleBaseFetcher.RuleBaseService.GetBanksResponse> GetBanksAsync() {
+            RuleBaseFetcher.RuleBaseService.GetBanksRequest inValue = new RuleBaseFetcher.RuleBaseService.GetBanksRequest();
+            inValue.Body = new RuleBaseFetcher.RuleBaseService.GetBanksRequestBody();
+            return ((RuleBaseFetcher.RuleBaseService.RuleBaseServiceSoap)(this)).GetBanksAsync(inValue);
         }
     }
 }
