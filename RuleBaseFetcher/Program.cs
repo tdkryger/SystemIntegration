@@ -1,21 +1,18 @@
-﻿using CreditScoreInterface;
+﻿using LoanBroker.model;
+using Newtonsoft.Json;
+using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RabbitMQ;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using Newtonsoft.Json;
-using LoanBroker.model;
 
-namespace CreditScoreFetcher
+namespace RuleBaseFetcher
 {
     public class Program
     {
-        private static string QUEUE_IN = "group1_loanbroker_in";
-        private static string QUEUE_OUT = "group1_creditbureau_out";
+        private static string QUEUE_IN = "group1_creditbureau_out";
+        private static string QUEUE_OUT = "group1_bankfetcher_out";
 
         public static void Main(string[] args)
         {
@@ -26,13 +23,13 @@ namespace CreditScoreFetcher
 
                 LoanRequest loanRequest;
 
-                CreditScoreService.CreditScoreServiceClient service = new CreditScoreService.CreditScoreServiceClient();
                 loanRequest = JsonConvert.DeserializeObject<LoanRequest>(Encoding.UTF8.GetString(ea.Body));
 
                 Console.WriteLine("<--Message content:");
                 Console.WriteLine("<--" + loanRequest);
 
-                loanRequest.CreditScore = service.creditScore(loanRequest.SSN);
+                // Add enrichment code beneath here
+
 
                 Console.WriteLine("<--Enriched message content:");
                 Console.WriteLine("<--" + loanRequest);

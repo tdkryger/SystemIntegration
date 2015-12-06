@@ -23,11 +23,14 @@ namespace LoanBroker.model
         /// <summary>
         /// ID of bank. We only have 4 banks, so valid values are 1 to 4
         /// </summary>
-        public int Id { get;  set; }
+        public int Id { get; set; }
+
         /// <summary>
         /// A descriptive name for the bank
         /// </summary>
-        public string Name { get;  set; }
+        public string Name { get; set; }
+
+        public int MinCreditRating { get; set; }
         #endregion
 
         #region Constructor
