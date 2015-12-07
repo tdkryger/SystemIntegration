@@ -50,6 +50,7 @@ namespace Utility
                 Console.WriteLine(" An error occured: ");
                 Console.WriteLine(e.Message);
                 Console.WriteLine(" No message has been sent. ");
+
                 result = false;
             }
 
@@ -79,13 +80,17 @@ namespace Utility
                 string jSonString = JsonConvert.SerializeObject(messageObject);
                 byte[] body = Encoding.UTF8.GetBytes(jSonString);
 
-                Channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: body);
+                Channel.BasicPublish(exchange: exchangeName,
+                                     routingKey: routingKey, 
+                                     basicProperties: null, 
+                                     body: body);
             }
             catch (Exception e)
             {
                 Console.WriteLine(" An error occured: ");
                 Console.WriteLine(e.Message);
                 Console.WriteLine(" No message has been sent. ");
+
                 result = false;
             }
             return result;
@@ -109,7 +114,10 @@ namespace Utility
 
                 byte[] body = Encoding.UTF8.GetBytes(messageString);
 
-                Channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: body);
+                Channel.BasicPublish(exchange: exchangeName, 
+                                     routingKey: routingKey, 
+                                     basicProperties: null, 
+                                     body: body);
             }
             catch (Exception e)
             {
@@ -159,11 +167,21 @@ namespace Utility
             EventingBasicConsumer consumer;
             
             Channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
+
             string queueName = Channel.QueueDeclare().QueueName;
-            Channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
-            Channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: routingKey);
+
+            Channel.QueueDeclare(queue: queueName, 
+                                 durable: false, 
+                                 exclusive: false, 
+                                 autoDelete: false, 
+                                 arguments: null);
+            Channel.QueueBind(queue: queueName, 
+                              exchange: exchangeName, 
+                              routingKey: routingKey);
+
             consumer = new EventingBasicConsumer(Channel);
             consumer.Received += method;
+
             Channel.BasicConsume(queue: queueName, noAck: true, consumer: consumer);
 
             return consumer;
