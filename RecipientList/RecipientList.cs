@@ -12,7 +12,7 @@ namespace RecipientList
     class RecipientList
     {
         private static string QUEUE_IN = "group1_bankfetcher_out";
-        private static string EXCHANGE_OUT = "group1_delegater_out";
+        private static string EXCHANGE_OUT = "group1_rulebasefetcher_out";
 
         public static void Main(string[] args)
         {

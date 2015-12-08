@@ -28,6 +28,7 @@ namespace RabbitMQBank
                 Console.WriteLine("<--Message content:");
                 Console.WriteLine("<--" + message);
 
+                //SSN;CreditScore;Amount;Duration
                 string[] parts = message.Split(';');
                 string ssn = parts[0];
                 int creditScore = 0;

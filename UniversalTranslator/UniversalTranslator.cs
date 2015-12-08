@@ -11,7 +11,8 @@ namespace UniversalTranslator
 {
     class UniversalTranslator
     {
-        private static string EXCHANGE_IN = "group1_delegater_out";
+        private static string EXCHANGE_IN = "group1_rulebasefetcher_out";
+        private static string QUEUE_OUT = "group1_delegater_out";
 
         static void Main(string[] args)
         {
@@ -95,7 +96,9 @@ namespace UniversalTranslator
 
         private static void handleRabbitMQOurBank(LoanRequest loanRequest)
         {
-
+            //SSN;CreditScore;Amount;Duration
+            string msg = string.Format("{0};{1};{2};{3}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
+            Utility.HandleMessaging.SendMessage<string>(QUEUE_OUT, msg);
         }
     }
 }
