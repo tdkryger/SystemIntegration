@@ -11,70 +11,23 @@ namespace RabbitMQBank
 {
     class RabbitMQBank
     {
-        static IModel ReceiveChannel;
-        static IConnection connection;
 
-        static string SendQueueName = "group1_bank_out";
-        static string ReceiveQueueName = "group1_delegater_out";
+        static string QUEUE_OUT = "group1_bank_out";
+        static string QUEUE_IN = "group1_delegater_out";
 
         static void Main(string[] args)
         {
-            /*
-            group1_delegater_out
-                1)  Factory
-                2)  Wait for message
-                3)  Responde to message
-                4)  Goto 2
-            */
-
-            // Get Queue names from LoanBroker Project
-            //ResourceManager resMan = new ResourceManager("LoanBroker", System.Reflection.Assembly.GetExecutingAssembly());
-            //ReceiveQueueName = resMan.GetString("QueueNameBankDelegator");
-            //SendQueueName = resMan.GetString("QueueNameBankOut");
-
-            var factory = new ConnectionFactory()
+            Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
+            Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
             {
-                HostName = "datdb.cphbusiness.dk"
-            };
+                Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
 
-            using (connection = factory.CreateConnection())
-            {
-                using (ReceiveChannel = connection.CreateModel())
-                {
+                byte[] inBody = ea.Body;
+                string message = Encoding.UTF8.GetString(inBody);
 
-                    ReceiveChannel.QueueDeclare(queue: ReceiveQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                Console.WriteLine("<--Message content:");
+                Console.WriteLine("<--" + message);
 
-                    var consumer = new EventingBasicConsumer(ReceiveChannel);
-
-                    consumer.Received += Consumer_Received;
-
-                    ReceiveChannel.BasicConsume(queue: ReceiveQueueName, noAck: true, consumer: consumer);
-
-                    Console.WriteLine(" Press [enter] to exit.");
-                    Console.ReadLine();
-                }
-            }
-        }
-
-        private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
-        {
-            byte[] inBody = e.Body;
-            string message = Encoding.UTF8.GetString(inBody);
-            Console.WriteLine(" [x] Received {0}", message);
-
-            using (var channel = connection.CreateModel())
-            {
-
-
-                //channel.QueueDeclare(queue: SendQueueName,
-                //                     durable: false,
-                //                     exclusive: false,
-                //                     autoDelete: false,
-                //                     arguments: null);
-
-                ////string message = "Hello Rabbit!";
-                ////Split recieveMessage into params
-                //// ssn;creditScore;amount;duration
                 string[] parts = message.Split(';');
                 string ssn = parts[0];
                 int creditScore = 0;
@@ -86,16 +39,12 @@ namespace RabbitMQBank
 
                 double sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
-                Utility.HandleMessaging.SendMessage<double>(SendQueueName, sendMessage);
+                Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT + " > " + sendMessage.ToString());
+                Console.WriteLine();
 
-                //byte[] outBody = Encoding.UTF8.GetBytes(sendMessage.ToString());
+                Utility.HandleMessaging.SendMessage<double>(QUEUE_OUT, sendMessage);
+            });
 
-                //channel.BasicPublish(exchange: "",
-                //                     routingKey: SendQueueName,
-                //                     basicProperties: null,
-                //                     body: outBody);
-                //Console.WriteLine(" [x] Sent {0}", sendMessage.ToString());
-            }
         }
     }
 }
