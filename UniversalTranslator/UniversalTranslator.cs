@@ -66,15 +66,15 @@ namespace UniversalTranslator
 
         private static void handleWebServiceBank(LoanRequest loanRequest)
         {
-
+            WebServiceBank.WebServiceBank webBank = new WebServiceBank.WebServiceBank();
+            decimal msg = webBank.ProcessLoanRequest(loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
+            Utility.HandleMessaging.SendMessage<decimal>("group1_bank_out", msg);
         }
 
         private static void handleRabbitMQXMLBank(LoanRequest loanRequest)
         {
+            //TODO: Make cphbusiness.bankXML work
             DateTime dtDuraion = new DateTime(1970, 1, 1).AddMonths(loanRequest.Duration);
-
-            //TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
-
             string msg = string.Format("<LoanRequest><ssn>{0}</ssn><creditScore>{1}</creditScore><loanAmount>{2}</loanAmount><loanDuration>{3}</loanDuration></LoanRequest>", 
                 loanRequest.SSN, 
                 loanRequest.CreditScore, 
@@ -82,16 +82,18 @@ namespace UniversalTranslator
                 dtDuraion.ToString("yyyy-MM-dd HH:mm:ss:ff CET") // since we dont care about hours and so on, time zone info is useless
                 );
             // Dunno the routing key..
-            Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", "", msg, "fanout");
+            Utility.HandleMessaging.SendMessage("cphbusiness.bankXML", "", msg, "fanout");
+            // And how do we get the message back?
         }
 
 
         private static void handleRabbitMQJSONBank(LoanRequest loanRequest)
         {
-            
+            //TODO: Make cphbusiness.bankJSON work
             string msg = string.Format("{\"ssn\":{0},\"creditScore\":{1},\"loanAmount\":{2},\"loanDuration\":{3}}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
             // Dunno the routing key..
             Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", "", msg, "fanout");
+            // And how do we get the message back?
         }
 
         private static void handleRabbitMQOurBank(LoanRequest loanRequest)

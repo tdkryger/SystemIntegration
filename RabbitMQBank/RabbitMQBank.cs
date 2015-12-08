@@ -33,17 +33,17 @@ namespace RabbitMQBank
                 string ssn = parts[0];
                 int creditScore = 0;
                 int.TryParse(parts[1], out creditScore);
-                double amount = 0;
-                double.TryParse(parts[2], out amount);
+                decimal amount = 0;
+                decimal.TryParse(parts[2], out amount);
                 int duration = 0;
                 int.TryParse(parts[3], out duration);
 
-                double sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
+                decimal sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
                 Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT + " > " + sendMessage.ToString());
                 Console.WriteLine();
 
-                Utility.HandleMessaging.SendMessage<double>(QUEUE_OUT, sendMessage);
+                Utility.HandleMessaging.SendMessage<decimal>(QUEUE_OUT, sendMessage);
             });
 
         }

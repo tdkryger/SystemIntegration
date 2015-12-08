@@ -17,9 +17,9 @@ namespace WebServiceBank
     public class WebServiceBank : System.Web.Services.WebService
     {
         [WebMethod]
-        public double ProcessLoanRequest(string ssn, int creditScore, double amount, int duration)
+        public decimal ProcessLoanRequest(string ssn, int creditScore, decimal amount, int duration)
         {
-            return SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
+            return SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore,  amount, duration);
         }
     }
 }

@@ -30,6 +30,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipientList", "RecipientList\RecipientList.csproj", "{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalTranslator", "UniversalTranslator\UniversalTranslator.csproj", "{4FC1D2EA-3A0E-4808-AEFC-6BCD025DC879}"
+	ProjectSection(ProjectDependencies) = postProject
+		{544FA518-9DBF-4B05-A6E6-B919564C4183} = {544FA518-9DBF-4B05-A6E6-B919564C4183}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
