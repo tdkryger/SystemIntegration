@@ -307,7 +307,7 @@ bankfetcher_out</panel_attributes>
       <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-bankfetcher_out</panel_attributes>
+rulebasefetcher_out</panel_attributes>
     <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -318,7 +318,8 @@ bankfetcher_out</panel_attributes>
       <w>1008</w>
       <h>424</h>
     </coordinates>
-    <panel_attributes>Loan Broker</panel_attributes>
+    <panel_attributes>Loan Broker
+layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
