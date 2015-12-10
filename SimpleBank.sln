@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleBaseWebServiceTest", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipientList", "RecipientList\RecipientList.csproj", "{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQJSONBankNormalizer", "RabbitMQBankNormalizer\RabbitMQJSONBankNormalizer.csproj", "{7AE9626F-7D10-44D5-89DA-D574F0348BCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQXMLBankNormalizer", "RabbitMQXMLBankNormalizer\RabbitMQXMLBankNormalizer.csproj", "{6A1980FB-984F-4979-A44A-A3FC13ED1912}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9C02BCF-23B0-472A-8F58-AAF87B90DC75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AE9626F-7D10-44D5-89DA-D574F0348BCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AE9626F-7D10-44D5-89DA-D574F0348BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AE9626F-7D10-44D5-89DA-D574F0348BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AE9626F-7D10-44D5-89DA-D574F0348BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1980FB-984F-4979-A44A-A3FC13ED1912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1980FB-984F-4979-A44A-A3FC13ED1912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1980FB-984F-4979-A44A-A3FC13ED1912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1980FB-984F-4979-A44A-A3FC13ED1912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
