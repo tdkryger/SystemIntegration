@@ -1,14 +1,14 @@
 ﻿using LoanBroker.model;
+using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
-using System.IO;
 using System.Text;
 
-namespace RabbitMQXMLBankNormalizer
+namespace RabbitMQOurBankNormalizer
 {
     public class Program
     {
-        private static string QUEUE_IN = "group1_rabbitmqxmlbank_out";
+        private static string QUEUE_IN = "group1_rabbitmqourbank_out";
         private static string QUEUE_OUT = "group1_normalizer_out";
 
         public static void Main(string[] args)
@@ -18,22 +18,15 @@ namespace RabbitMQXMLBankNormalizer
                 Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
 
                 LoanResponse loanResponse;
-                XMLBankResponse bankResponse;
-                System.Xml.Serialization.XmlSerializer serializer;
+                OurBankResponse bankResponse;
 
-                serializer = new System.Xml.Serialization.XmlSerializer(typeof(XMLBankResponse));
-
-                using (TextReader reader = new StringReader(Encoding.UTF8.GetString(ea.Body)))
+                bankResponse = JsonConvert.DeserializeObject<OurBankResponse>(Encoding.UTF8.GetString(ea.Body));
+                loanResponse = new LoanResponse()
                 {
-                    bankResponse = serializer.Deserialize(reader) as XMLBankResponse;
-
-                    loanResponse = new LoanResponse()
-                    {
-                        InterestRate = bankResponse.InterestRate,
-                        SSN = bankResponse.SSN,
-                        BankName = ea.RoutingKey.Split('_')[1] // Gets the bank name from the queue name
-                    };
-                }
+                    InterestRate = bankResponse.InterestRate,
+                    SSN = bankResponse.SSN,
+                    BankName = bankResponse.Name
+                };
 
                 Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
                 Console.WriteLine();
@@ -41,8 +34,9 @@ namespace RabbitMQXMLBankNormalizer
             });
         }
 
-        private class XMLBankResponse
+        private class OurBankResponse
         {
+            public string Name { get; set; }
             public string SSN { get; set; }
             public decimal InterestRate { get; set; }
         }

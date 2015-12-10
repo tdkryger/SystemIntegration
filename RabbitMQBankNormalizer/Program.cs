@@ -25,7 +25,7 @@ namespace RabbitMQJSONBankNormalizer
                 {
                     InterestRate = bankResponse.InterestRate,
                     SSN = bankResponse.SSN,
-                    BankName = ea.RoutingKey
+                    BankName = ea.RoutingKey.Split('_')[1] // Gets the bank name from the queue name
                 };
 
                 Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
