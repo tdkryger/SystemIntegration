@@ -12,6 +12,8 @@ namespace UniversalTranslator
     class UniversalTranslator
     {
         private static string EXCHANGE_IN = "group1_rulebasefetcher_out";
+        private static string QUEUE_REPLY_JSON = "group1_reply_json";
+        private static string QUEUE_REPLY_XML = "group1_reply_xml";
         private static string QUEUE_OUT = "group1_delegater_out";
 
         static void Main(string[] args)
@@ -86,7 +88,7 @@ namespace UniversalTranslator
                 dtDuraion.ToString("yyyy-MM-dd HH:mm:ss:ff CET") // since we dont care about hours and so on, time zone info is useless
                 );
             // Dunno the routing key..
-            LoanBroker.Utility.HandleMessaging.SendMessage("cphbusiness.bankXML", "", msg, "fanout");
+            LoanBroker.Utility.HandleMessaging.SendMessage("cphbusiness.bankXML", QUEUE_REPLY_XML, msg, "fanout");
             // And how do we get the message back?
         }
 
@@ -95,8 +97,7 @@ namespace UniversalTranslator
         {
             //TODO: Make cphbusiness.bankJSON work
             string msg = string.Format("{\"ssn\":{0},\"creditScore\":{1},\"loanAmount\":{2},\"loanDuration\":{3}}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
-            // Dunno the routing key..
-            LoanBroker.Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", "", msg, "fanout");
+            LoanBroker.Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", QUEUE_REPLY_JSON, msg, "fanout");
             // And how do we get the message back?
             // Reply Channel in header
         }
