@@ -98,7 +98,9 @@ namespace UniversalTranslator
             // Dunno the routing key..
             Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", "", msg, "fanout");
             // And how do we get the message back?
+            // Reply Channel in header
         }
+
 
         private static void handleRabbitMQOurBank(LoanRequest loanRequest)
         {
