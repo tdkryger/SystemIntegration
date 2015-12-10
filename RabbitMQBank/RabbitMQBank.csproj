@@ -65,10 +65,6 @@
       <Project>{da9105ac-c9e6-4c1c-9ede-9afb65c08070}</Project>
       <Name>SimpleBank</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{2f4585b1-779c-4093-86b8-290f69b93d6d}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,7 +18,7 @@ namespace RabbitMQBank
         static void Main(string[] args)
         {
             Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
-            Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
 
@@ -43,7 +43,7 @@ namespace RabbitMQBank
                 Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT + " > " + sendMessage.ToString());
                 Console.WriteLine();
 
-                Utility.HandleMessaging.SendMessage<decimal>(QUEUE_OUT, sendMessage);
+                LoanBroker.Utility.HandleMessaging.SendMessage<decimal>(QUEUE_OUT, sendMessage);
             });
 
         }
