@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>6</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>0</x>
-      <y>174</y>
-      <w>84</w>
-      <h>48</h>
+      <x>80</x>
+      <y>140</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=yellow
@@ -17,10 +17,10 @@ Client</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>324</x>
-      <y>48</y>
-      <w>102</w>
-      <h>60</h>
+      <x>350</x>
+      <y>35</y>
+      <w>85</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>Credit Web Service
 
@@ -30,10 +30,10 @@ bg=dark_gray</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>930</x>
-      <y>204</y>
-      <w>96</w>
-      <h>36</h>
+      <x>855</x>
+      <y>165</y>
+      <w>80</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Bank RabbitMQ
 bg=green</panel_attributes>
@@ -42,10 +42,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>132</x>
-      <y>174</y>
-      <w>126</w>
-      <h>48</h>
+      <x>190</x>
+      <y>140</y>
+      <w>105</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -56,10 +56,10 @@ Loan Broker Web Service</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>492</x>
-      <y>174</y>
-      <w>84</w>
-      <h>48</h>
+      <x>490</x>
+      <y>140</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -70,10 +70,10 @@ RuleBaseFetcher</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>936</x>
-      <y>252</y>
-      <w>84</w>
-      <h>36</h>
+      <x>860</x>
+      <y>205</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Bank RabbitMQ
 JSON
@@ -84,9 +84,9 @@ bg=dark_gray</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>480</x>
-      <y>54</y>
-      <w>108</w>
-      <h>66</h>
+      <y>40</y>
+      <w>90</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>Rule Base Web Service
 bg=green</panel_attributes>
@@ -95,10 +95,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>330</x>
-      <y>174</y>
-      <w>84</w>
-      <h>48</h>
+      <x>355</x>
+      <y>140</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -109,10 +109,10 @@ CreditScoreFetcher</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>930</x>
-      <y>126</y>
-      <w>96</w>
-      <h>36</h>
+      <x>855</x>
+      <y>100</y>
+      <w>80</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Bank Web Service
 bg=green</panel_attributes>
@@ -121,10 +121,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>936</x>
-      <y>306</y>
-      <w>84</w>
-      <h>42</h>
+      <x>860</x>
+      <y>250</y>
+      <w>70</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>Bank RabbitMQ
 XML
@@ -134,10 +134,10 @@ bg=dark_gray</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>336</x>
-      <y>378</y>
-      <w>120</w>
-      <h>48</h>
+      <x>360</x>
+      <y>310</y>
+      <w>100</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -148,10 +148,10 @@ Integrator</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>300</y>
-      <w>84</w>
-      <h>36</h>
+      <x>765</x>
+      <y>245</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -162,10 +162,10 @@ Translator</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>132</y>
-      <w>84</w>
-      <h>36</h>
+      <x>765</x>
+      <y>105</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -176,10 +176,10 @@ Translator</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>204</y>
-      <w>84</w>
-      <h>36</h>
+      <x>765</x>
+      <y>165</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -190,10 +190,10 @@ Translator</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>252</y>
-      <w>84</w>
-      <h>36</h>
+      <x>765</x>
+      <y>205</y>
+      <w>70</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -204,10 +204,10 @@ Translator</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>660</x>
-      <y>174</y>
-      <w>84</w>
-      <h>48</h>
+      <x>630</x>
+      <y>140</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -219,10 +219,10 @@ Delegater
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>378</y>
-      <w>84</w>
-      <h>48</h>
+      <x>765</x>
+      <y>310</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -233,10 +233,10 @@ Normalizer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
-      <y>186</y>
-      <w>90</w>
-      <h>24</h>
+      <x>290</x>
+      <y>150</y>
+      <w>75</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 loanbroker_in</panel_attributes>
@@ -245,10 +245,10 @@ loanbroker_in</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>408</x>
-      <y>186</y>
-      <w>96</w>
-      <h>24</h>
+      <x>420</x>
+      <y>150</y>
+      <w>80</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 bankfetcher_out</panel_attributes>
@@ -257,10 +257,10 @@ bankfetcher_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>342</x>
-      <y>102</y>
-      <w>18</w>
-      <h>84</h>
+      <x>365</x>
+      <y>80</y>
+      <w>15</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
@@ -268,10 +268,10 @@ bankfetcher_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
-      <y>102</y>
-      <w>18</w>
-      <h>84</h>
+      <x>400</x>
+      <y>80</y>
+      <w>15</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
@@ -279,10 +279,10 @@ bankfetcher_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>498</x>
-      <y>114</y>
-      <w>18</w>
-      <h>72</h>
+      <x>495</x>
+      <y>90</y>
+      <w>15</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -290,10 +290,10 @@ bankfetcher_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>546</x>
-      <y>114</y>
-      <w>18</w>
-      <h>72</h>
+      <x>535</x>
+      <y>90</y>
+      <w>15</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
@@ -301,10 +301,10 @@ bankfetcher_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>186</y>
-      <w>102</w>
-      <h>24</h>
+      <x>555</x>
+      <y>150</y>
+      <w>85</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 rulebasefetcher_out</panel_attributes>
@@ -313,10 +313,10 @@ rulebasefetcher_out</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>162</x>
-      <y>108</y>
-      <w>756</w>
-      <h>492</h>
+      <x>215</x>
+      <y>85</y>
+      <w>630</w>
+      <h>410</h>
     </coordinates>
     <panel_attributes>Loan Broker
 layer=-3</panel_attributes>
@@ -325,10 +325,10 @@ layer=-3</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>738</x>
-      <y>150</y>
-      <w>96</w>
-      <h>66</h>
+      <x>695</x>
+      <y>120</y>
+      <w>80</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 delegater_out</panel_attributes>
@@ -337,10 +337,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>198</y>
-      <w>78</w>
-      <h>132</h>
+      <x>710</x>
+      <y>160</y>
+      <w>65</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -349,10 +349,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>264</y>
-      <w>78</w>
-      <h>18</h>
+      <x>710</x>
+      <y>215</y>
+      <w>65</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
@@ -360,10 +360,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>216</y>
-      <w>78</w>
-      <h>18</h>
+      <x>710</x>
+      <y>175</y>
+      <w>65</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
@@ -371,10 +371,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>126</y>
-      <w>48</w>
-      <h>24</h>
+      <x>830</x>
+      <y>100</y>
+      <w>40</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;20.0</additional_attributes>
@@ -382,10 +382,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>150</y>
-      <w>48</w>
-      <h>18</h>
+      <x>830</x>
+      <y>120</y>
+      <w>40</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -393,10 +393,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>204</y>
-      <w>54</w>
-      <h>18</h>
+      <x>830</x>
+      <y>165</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -404,10 +404,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>258</y>
-      <w>54</w>
-      <h>18</h>
+      <x>830</x>
+      <y>210</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -415,10 +415,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>306</y>
-      <w>54</w>
-      <h>18</h>
+      <x>830</x>
+      <y>250</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
@@ -426,10 +426,10 @@ delegater_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>162</y>
-      <w>288</w>
-      <h>414</h>
+      <x>830</x>
+      <y>130</y>
+      <w>240</w>
+      <h>345</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 
@@ -444,22 +444,22 @@ WebServiceBank_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>204</x>
-      <y>216</y>
-      <w>144</w>
-      <h>198</h>
+      <x>250</x>
+      <y>175</y>
+      <w>120</w>
+      <h>165</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 loanbroker_out</panel_attributes>
-    <additional_attributes>10.0;10.0;220.0;310.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;310.0;220.0;310.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>78</x>
-      <y>198</y>
-      <w>66</w>
-      <h>18</h>
+      <x>145</x>
+      <y>160</y>
+      <w>55</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
@@ -467,10 +467,10 @@ loanbroker_out</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>78</x>
-      <y>180</y>
-      <w>66</w>
-      <h>18</h>
+      <x>145</x>
+      <y>145</y>
+      <w>55</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
@@ -478,10 +478,10 @@ loanbroker_out</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>6</x>
-      <y>258</y>
-      <w>120</w>
-      <h>144</h>
+      <x>85</x>
+      <y>210</y>
+      <w>100</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Yellow:
 We might make it
@@ -499,10 +499,10 @@ group1_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>390</y>
-      <w>384</w>
-      <h>24</h>
+      <x>455</x>
+      <y>320</y>
+      <w>320</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 normalizer_out</panel_attributes>
@@ -511,10 +511,10 @@ normalizer_out</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>432</y>
-      <w>84</w>
-      <h>48</h>
+      <x>765</x>
+      <y>355</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -525,10 +525,10 @@ Normalizer</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>486</y>
-      <w>84</w>
-      <h>48</h>
+      <x>765</x>
+      <y>400</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -539,10 +539,10 @@ Normalizer</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>822</x>
-      <y>540</y>
-      <w>84</w>
-      <h>48</h>
+      <x>765</x>
+      <y>445</y>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>symbol=component
 bg=green
@@ -553,10 +553,10 @@ Normalizer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>318</y>
-      <w>258</w>
-      <h>96</h>
+      <x>830</x>
+      <y>260</y>
+      <w>215</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 RabbitMQXMLBank_out
@@ -566,10 +566,10 @@ RabbitMQXMLBank_out
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>264</y>
-      <w>276</w>
-      <h>204</h>
+      <x>830</x>
+      <y>215</y>
+      <w>230</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 
@@ -581,10 +581,10 @@ RabbitMQJSONBank_out
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>216</y>
-      <w>276</w>
-      <h>306</h>
+      <x>830</x>
+      <y>175</y>
+      <w>230</w>
+      <h>255</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 
@@ -598,10 +598,10 @@ RabbitMQOurBank_out
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>396</y>
-      <w>78</w>
-      <h>72</h>
+      <x>710</x>
+      <y>325</y>
+      <w>65</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;10.0;100.0;110.0;100.0</additional_attributes>
@@ -609,10 +609,10 @@ RabbitMQOurBank_out
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>450</y>
-      <w>78</w>
-      <h>72</h>
+      <x>710</x>
+      <y>370</y>
+      <w>65</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;10.0;100.0;110.0;100.0</additional_attributes>
@@ -620,10 +620,10 @@ RabbitMQOurBank_out
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>504</y>
-      <w>78</w>
-      <h>72</h>
+      <x>710</x>
+      <y>415</y>
+      <w>65</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;10.0;100.0;110.0;100.0</additional_attributes>
