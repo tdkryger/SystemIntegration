@@ -67,9 +67,9 @@ namespace LoanBroker.Utility
         /// <param name="exchangeName">The name of the exchange</param>
         /// <param name="exchangeType">Type of exchange. Defaults to direct</param>
         /// <param name="messageObject">The object to send</param>
-        /// <param name="routingKey">the routing key</param>
+        /// <param name="replyQueue">the reply queue</param>
         /// <returns></returns>
-        public static bool SendMessage<T>(string exchangeName, string routingKey, T messageObject, string exchangeType = "direct")
+        public static bool SendMessage<T>(string exchangeName, string replyQueue, T messageObject, string exchangeType = "direct")
         {
             bool result = true; ;
 
@@ -80,9 +80,12 @@ namespace LoanBroker.Utility
                 string jSonString = JsonConvert.SerializeObject(messageObject);
                 byte[] body = Encoding.UTF8.GetBytes(jSonString);
 
+                var props = Channel.CreateBasicProperties();
+                props.ReplyTo = replyQueue;
+
                 Channel.BasicPublish(exchange: exchangeName,
-                                     routingKey: routingKey, 
-                                     basicProperties: null, 
+                                     routingKey: "", 
+                                     basicProperties: props, 
                                      body: body);
             }
             catch (Exception e)
@@ -128,7 +131,6 @@ namespace LoanBroker.Utility
             }
             return result;
         }
-
 
         /// <summary>
         /// Hooks the "method" method to "consumer.Recieve" eventhandler
