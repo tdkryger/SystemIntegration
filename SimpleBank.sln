@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQBankTest", "RabbitM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditScoreInterface", "CreditScoreInterface\CreditScoreInterface.csproj", "{6F281CFC-7CDA-45E9-8490-A763A87AC362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dummy", "Dummy\Dummy.csproj", "{384B5307-DA85-4716-AC1C-6B9548551BED}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanBroker", "LoanBroker\LoanBroker.csproj", "{3A28C3D7-DC4F-4E06-B4BD-BE4408BBC019}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditScoreFetcher", "CreditScoreFetcher\CreditScoreFetcher.csproj", "{9C8A81EB-62A6-47AF-913B-C378EB89776C}"
@@ -60,10 +58,6 @@ Global
 		{6F281CFC-7CDA-45E9-8490-A763A87AC362}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F281CFC-7CDA-45E9-8490-A763A87AC362}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F281CFC-7CDA-45E9-8490-A763A87AC362}.Release|Any CPU.Build.0 = Release|Any CPU
-		{384B5307-DA85-4716-AC1C-6B9548551BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{384B5307-DA85-4716-AC1C-6B9548551BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{384B5307-DA85-4716-AC1C-6B9548551BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{384B5307-DA85-4716-AC1C-6B9548551BED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A28C3D7-DC4F-4E06-B4BD-BE4408BBC019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A28C3D7-DC4F-4E06-B4BD-BE4408BBC019}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A28C3D7-DC4F-4E06-B4BD-BE4408BBC019}.Release|Any CPU.ActiveCfg = Release|Any CPU
