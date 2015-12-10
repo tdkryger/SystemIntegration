@@ -68,6 +68,7 @@ namespace UniversalTranslator
         {
             WebServiceBank.WebServiceBank webBank = new WebServiceBank.WebServiceBank();
             decimal msg = webBank.ProcessLoanRequest(loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
+            //TODO: Send loanrequest info aswell as decimal msg
             Utility.HandleMessaging.SendMessage<decimal>("group1_bank_out", msg);
         }
 
