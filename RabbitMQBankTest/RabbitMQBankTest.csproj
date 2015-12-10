@@ -60,6 +60,10 @@
       <Project>{3a28c3d7-dc4f-4e06-b4bd-be4408bbc019}</Project>
       <Name>LoanBroker</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RabbitMQBank\RabbitMQBank.csproj">
+      <Project>{a0ea33b3-26ce-4160-a52b-79a464597e3a}</Project>
+      <Name>RabbitMQBank</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
