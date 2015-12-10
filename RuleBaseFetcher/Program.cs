@@ -16,7 +16,7 @@ namespace RuleBaseFetcher
         public static void Main(string[] args)
         {
             Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
-            Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
 
@@ -55,7 +55,7 @@ namespace RuleBaseFetcher
 
                 Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
                 Console.WriteLine();
-                Utility.HandleMessaging.SendMessage<LoanRequest>(QUEUE_OUT, loanRequest);
+                LoanBroker.Utility.HandleMessaging.SendMessage<LoanRequest>(QUEUE_OUT, loanRequest);
             });
         }
     }

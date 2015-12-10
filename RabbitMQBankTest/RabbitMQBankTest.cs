@@ -19,7 +19,7 @@ namespace RabbitMQBankTest
             Console.WriteLine("\n\t<--Started sending messages!");
             for (int i = 0; i < messages; i++)
             {
-                Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = 100, Duration = 12, SSN = "123456-7890" });
+                LoanBroker.Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = 100, Duration = 12, SSN = "123456-7890" });
                 Console.WriteLine("\t<--Messages sent: " + (i + 1) + "/" + messages);
             }
             Console.WriteLine("\t<--Stopped sending messages!\n");
@@ -29,7 +29,7 @@ namespace RabbitMQBankTest
 
             Console.WriteLine("\n\t<--Started receiving messages!");
 
-            var consumer = Utility.HandleMessaging.RecieveMessage(ReceiveQueueName, (object model, BasicDeliverEventArgs ea) =>
+            var consumer = LoanBroker.Utility.HandleMessaging.RecieveMessage(ReceiveQueueName, (object model, BasicDeliverEventArgs ea) =>
             {
                 byte[] body = ea.Body;
                 string message = Encoding.UTF8.GetString(body);

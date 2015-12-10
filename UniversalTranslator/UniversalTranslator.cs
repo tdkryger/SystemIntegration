@@ -32,7 +32,7 @@ namespace UniversalTranslator
 
             Console.WriteLine("<--Listening for messages on exchange: " + EXCHANGE_IN + " with routing key: " + routingKey);
 
-            Utility.HandleMessaging.RecieveMessage(EXCHANGE_IN, routingKey, (object model, BasicDeliverEventArgs ea) =>
+            LoanBroker.Utility.HandleMessaging.RecieveMessage(EXCHANGE_IN, routingKey, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on exchange: " + EXCHANGE_IN);
 
@@ -72,7 +72,7 @@ namespace UniversalTranslator
             WebServiceBank.WebServiceBank webBank = new WebServiceBank.WebServiceBank();
             decimal msg = webBank.ProcessLoanRequest(loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
             //TODO: Send loanrequest info aswell as decimal msg
-            Utility.HandleMessaging.SendMessage<decimal>("group1_bank_out", msg);
+            LoanBroker.Utility.HandleMessaging.SendMessage<decimal>("group1_bank_out", msg);
         }
 
         private static void handleRabbitMQXMLBank(LoanRequest loanRequest)
@@ -86,7 +86,7 @@ namespace UniversalTranslator
                 dtDuraion.ToString("yyyy-MM-dd HH:mm:ss:ff CET") // since we dont care about hours and so on, time zone info is useless
                 );
             // Dunno the routing key..
-            Utility.HandleMessaging.SendMessage("cphbusiness.bankXML", "", msg, "fanout");
+            LoanBroker.Utility.HandleMessaging.SendMessage("cphbusiness.bankXML", "", msg, "fanout");
             // And how do we get the message back?
         }
 
@@ -96,7 +96,7 @@ namespace UniversalTranslator
             //TODO: Make cphbusiness.bankJSON work
             string msg = string.Format("{\"ssn\":{0},\"creditScore\":{1},\"loanAmount\":{2},\"loanDuration\":{3}}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
             // Dunno the routing key..
-            Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", "", msg, "fanout");
+            LoanBroker.Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", "", msg, "fanout");
             // And how do we get the message back?
             // Reply Channel in header
         }
@@ -106,7 +106,7 @@ namespace UniversalTranslator
         {
             //SSN;CreditScore;Amount;Duration
             string msg = string.Format("{0};{1};{2};{3}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
-            Utility.HandleMessaging.SendMessage<string>(QUEUE_OUT, msg);
+            LoanBroker.Utility.HandleMessaging.SendMessage<string>(QUEUE_OUT, msg);
         }
     }
 }

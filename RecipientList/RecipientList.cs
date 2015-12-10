@@ -17,7 +17,7 @@ namespace RecipientList
         public static void Main(string[] args)
         {
             Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
-            Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
 
@@ -40,7 +40,7 @@ namespace RecipientList
                     foreach (Bank b in loanRequest.Banks)
                     {
                         //TDK: is this the best way to do Routing key? I think so. 
-                        Utility.HandleMessaging.SendMessage<LoanRequest>(EXCHANGE_OUT, b.Id.ToString(), loanRequest);
+                        LoanBroker.Utility.HandleMessaging.SendMessage<LoanRequest>(EXCHANGE_OUT, b.Id.ToString(), loanRequest);
                         Console.WriteLine("<--Sending message on exchange: " + EXCHANGE_OUT + " with routing key: " + b.Id.ToString());
                         Console.WriteLine();
                     }
