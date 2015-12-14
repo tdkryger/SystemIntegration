@@ -1,16 +1,13 @@
 ﻿using LoanBroker.model;
+using LoanBroker.Utility;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
-using System.Threading;
 
 namespace RabbitMQBankTest
 {
-    class RabbitMQBankTest
+    public class RabbitMQBankTest
     {
-        static string SendQueueName = "group1_loanbroker_in";
-        static string ReceiveQueueName = "group1_delegater_out";
-
         static void Main(string[] args)
         {
             Console.Write("-->Number of messages to send: ");
@@ -19,7 +16,12 @@ namespace RabbitMQBankTest
             Console.WriteLine("\n\t<--Started sending messages!");
             for (int i = 0; i < messages; i++)
             {
-                LoanBroker.Utility.HandleMessaging.SendMessage<LoanRequest>(SendQueueName, new LoanRequest() { Amount = 100, Duration = 12, SSN = "123456-7890" });
+                HandleMessaging.SendMessage<LoanRequest>(Queues.LOANBROKER_IN, new LoanRequest()
+                {
+                    Amount = 100,
+                    Duration = 12,
+                    SSN = "123456-7890"
+                });
                 Console.WriteLine("\t<--Messages sent: " + (i + 1) + "/" + messages);
             }
             Console.WriteLine("\t<--Stopped sending messages!\n");
@@ -29,7 +31,7 @@ namespace RabbitMQBankTest
 
             Console.WriteLine("\n\t<--Started receiving messages!");
 
-            var consumer = LoanBroker.Utility.HandleMessaging.RecieveMessage(ReceiveQueueName, (object model, BasicDeliverEventArgs ea) =>
+            var consumer = HandleMessaging.RecieveMessage(Queues.DELEGATER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
                 byte[] body = ea.Body;
                 string message = Encoding.UTF8.GetString(body);

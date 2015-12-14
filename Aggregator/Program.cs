@@ -1,4 +1,5 @@
 ﻿using LoanBroker.model;
+using LoanBroker.Utility;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
@@ -8,14 +9,11 @@ namespace Aggregator
 {
     public class Program
     {
-        private static string QUEUE_IN = "group1_normalizer_out";
-        private static string QUEUE_OUT = "group1_aggregator_out";
-
         public static void Main(string[] args)
         {
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            HandleMessaging.RecieveMessage(Queues.NORMALIZER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
+                Console.WriteLine("<--Message recieved on queue: " + Queues.NORMALIZER_OUT);
 
                 LoanResponse loanResponse;
 
@@ -23,9 +21,9 @@ namespace Aggregator
 
                 // Do some sweet aggregating!
 
-                Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
+                Console.WriteLine("<--Sending message on queue: " + Queues.AGGREGATOR_OUT);
                 Console.WriteLine();
-                LoanBroker.Utility.HandleMessaging.SendMessage<LoanResponse>(QUEUE_OUT, loanResponse);
+                HandleMessaging.SendMessage<LoanResponse>(Queues.AGGREGATOR_OUT, loanResponse);
             });
         }
     }

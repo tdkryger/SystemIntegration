@@ -1,4 +1,5 @@
 ﻿using LoanBroker.model;
+using LoanBroker.Utility;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
@@ -6,11 +7,8 @@ using System.Text;
 
 namespace TranslatorOur
 {
-    class TranslatorOur
+    public class TranslatorOur
     {
-        private static string EXCHANGE_IN = "group1_rulebasefetcher_out";
-        private static string QUEUE_OUT = "group1_rabbitmqourbank_out";
-
         static void Main(string[] args)
         {
             if (args.Length < 1)
@@ -27,11 +25,11 @@ namespace TranslatorOur
 
             string routingKey = args[0];
 
-            Console.WriteLine("<--Listening for messages on exchange: " + EXCHANGE_IN + " with routing key: " + routingKey);
+            Console.WriteLine("<--Listening for messages on exchange: " + Queues.RULEBASEFETCHER_OUT + " with routing key: " + routingKey);
 
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(EXCHANGE_IN, routingKey, (object model, BasicDeliverEventArgs ea) =>
+            HandleMessaging.RecieveMessage(Queues.RULEBASEFETCHER_OUT, routingKey, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on exchange: " + EXCHANGE_IN);
+                Console.WriteLine("<--Message recieved on exchange: " + Queues.RULEBASEFETCHER_OUT);
 
                 LoanRequest loanRequest;
 
@@ -50,7 +48,7 @@ namespace TranslatorOur
         {
             //SSN;CreditScore;Amount;Duration
             string msg = string.Format("{0};{1};{2};{3}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
-            LoanBroker.Utility.HandleMessaging.SendMessage<string>(QUEUE_OUT, msg);
+            HandleMessaging.SendMessage<string>(Queues.RABBITMQOURBANK_OUT, msg);
         }
     }
 }

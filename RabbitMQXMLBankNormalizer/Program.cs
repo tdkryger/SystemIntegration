@@ -1,4 +1,5 @@
 ﻿using LoanBroker.model;
+using LoanBroker.Utility;
 using RabbitMQ.Client.Events;
 using System;
 using System.IO;
@@ -8,14 +9,11 @@ namespace RabbitMQXMLBankNormalizer
 {
     public class Program
     {
-        private static string QUEUE_IN = "group1_rabbitmqxmlbank_out";
-        private static string QUEUE_OUT = "group1_normalizer_out";
-
         public static void Main(string[] args)
         {
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            HandleMessaging.RecieveMessage(Queues.RABBITMQXMLBANK_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
+                Console.WriteLine("<--Message recieved on queue: " + Queues.RABBITMQXMLBANK_OUT);
 
                 LoanResponse loanResponse;
                 XMLBankResponse bankResponse;
@@ -35,9 +33,9 @@ namespace RabbitMQXMLBankNormalizer
                     };
                 }
 
-                Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
+                Console.WriteLine("<--Sending message on queue: " + Queues.NORMALIZER_OUT);
                 Console.WriteLine();
-                LoanBroker.Utility.HandleMessaging.SendMessage<LoanResponse>(QUEUE_OUT, loanResponse);
+                HandleMessaging.SendMessage<LoanResponse>(Queues.NORMALIZER_OUT, loanResponse);
             });
         }
 

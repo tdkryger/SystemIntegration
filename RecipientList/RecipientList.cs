@@ -1,25 +1,20 @@
 ﻿using LoanBroker.model;
+using LoanBroker.Utility;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipientList
 {
-    class RecipientList
+    public class RecipientList
     {
-        private static string QUEUE_IN = "group1_bankfetcher_out";
-        private static string EXCHANGE_OUT = "group1_rulebasefetcher_out";
-
         public static void Main(string[] args)
         {
-            Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            Console.WriteLine("<--Listening for messages on queue: " + Queues.BANKFETCHER_OUT);
+            HandleMessaging.RecieveMessage(Queues.BANKFETCHER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
+                Console.WriteLine("<--Message recieved on queue: " + Queues.BANKFETCHER_OUT);
 
                 LoanRequest loanRequest;
 
@@ -37,11 +32,11 @@ namespace RecipientList
 
                 if (loanRequest.Banks != null)
                 {
-                    foreach (Bank b in loanRequest.Banks)
+                    foreach (Bank bank in loanRequest.Banks)
                     {
                         //TDK: is this the best way to do Routing key? I think so. 
-                        LoanBroker.Utility.HandleMessaging.SendMessage<LoanRequest>(EXCHANGE_OUT, b.Id.ToString(), loanRequest);
-                        Console.WriteLine("<--Sending message on exchange: " + EXCHANGE_OUT + " with routing key: " + b.Id.ToString());
+                        HandleMessaging.SendMessage<LoanRequest>(Queues.RULEBASEFETCHER_OUT, bank.Id.ToString(), loanRequest);
+                        Console.WriteLine("<--Sending message on exchange: " + Queues.RULEBASEFETCHER_OUT + " with routing key: " + bank.Id.ToString());
                         Console.WriteLine();
                     }
                 }   

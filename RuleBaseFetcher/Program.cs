@@ -1,4 +1,5 @@
 ﻿using LoanBroker.model;
+using LoanBroker.Utility;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using RuleBaseFetcher.RuleBaseService;
@@ -10,15 +11,12 @@ namespace RuleBaseFetcher
 {
     public class Program
     {
-        private static string QUEUE_IN = "group1_creditbureau_out";
-        private static string QUEUE_OUT = "group1_bankfetcher_out";
-
         public static void Main(string[] args)
         {
-            Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            Console.WriteLine("<--Listening for messages on queue: " + Queues.CREDITBUREAU_OUT);
+            HandleMessaging.RecieveMessage(Queues.CREDITBUREAU_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
+                Console.WriteLine("<--Message recieved on queue: " + Queues.CREDITBUREAU_OUT);
 
                 LoanRequest loanRequest;
 
@@ -27,10 +25,10 @@ namespace RuleBaseFetcher
                 Console.WriteLine("<--Message content:");
                 Console.WriteLine("<--" + loanRequest);
                 
-                RuleBaseService.RuleBaseServiceSoapClient service;
+                RuleBaseServiceSoapClient service;
                 ArrayOfString strings;
 
-                service = new RuleBaseService.RuleBaseServiceSoapClient();
+                service = new RuleBaseServiceSoapClient();
                 loanRequest.Banks = new List<Bank>();
                 strings = service.GetBanks();
 
@@ -53,9 +51,9 @@ namespace RuleBaseFetcher
                 Console.WriteLine("<--Enriched message content:");
                 Console.WriteLine("<--" + loanRequest);
 
-                Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT);
+                Console.WriteLine("<--Sending message on queue: " + Queues.BANKFETCHER_OUT);
                 Console.WriteLine();
-                LoanBroker.Utility.HandleMessaging.SendMessage<LoanRequest>(QUEUE_OUT, loanRequest);
+                HandleMessaging.SendMessage<LoanRequest>(Queues.BANKFETCHER_OUT, loanRequest);
             });
         }
     }

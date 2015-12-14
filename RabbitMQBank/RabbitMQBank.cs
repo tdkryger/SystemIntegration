@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RabbitMQ;
-using RabbitMQ.Client;
+﻿using LoanBroker.Utility;
 using RabbitMQ.Client.Events;
-using System.Resources;
+using System;
+using System.Text;
 
 namespace RabbitMQBank
 {
-    class RabbitMQBank
+    public class RabbitMQBank
     {
-
-        static string QUEUE_OUT = "group1_bank_out";
-        static string QUEUE_IN = "group1_delegater_out";
-
         static void Main(string[] args)
         {
-            Console.WriteLine("<--Listening for messages on queue: " + QUEUE_IN);
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(QUEUE_IN, (object model, BasicDeliverEventArgs ea) =>
+            Console.WriteLine("<--Listening for messages on queue: " + Queues.DELEGATER_OUT);
+            HandleMessaging.RecieveMessage(Queues.DELEGATER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on queue: " + QUEUE_IN);
+                Console.WriteLine("<--Message recieved on queue: " + Queues.DELEGATER_OUT);
 
                 byte[] inBody = ea.Body;
                 string message = Encoding.UTF8.GetString(inBody);
@@ -40,12 +32,11 @@ namespace RabbitMQBank
 
                 decimal sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
-                Console.WriteLine("<--Sending message on queue: " + QUEUE_OUT + " > " + sendMessage.ToString());
+                Console.WriteLine("<--Sending message on queue: " + Queues.BANK_OUT + " > " + sendMessage.ToString());
                 Console.WriteLine();
 
-                LoanBroker.Utility.HandleMessaging.SendMessage<decimal>(QUEUE_OUT, sendMessage);
+                HandleMessaging.SendMessage<decimal>(Queues.BANK_OUT, sendMessage);
             });
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LoanBroker.model;
+using LoanBroker.Utility;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
@@ -6,11 +7,8 @@ using System.Text;
 
 namespace TranslatorJSON
 {
-    class TranslatorJSON
+    public class TranslatorJSON
     {
-        private static string EXCHANGE_IN = "group1_rulebasefetcher_out";
-        private static string QUEUE_OUT = "group1_rabbitmqjsonbank_out";
-
         static void Main(string[] args)
         {
             if (args.Length < 1)
@@ -27,11 +25,11 @@ namespace TranslatorJSON
 
             string routingKey = args[0];
 
-            Console.WriteLine("<--Listening for messages on exchange: " + EXCHANGE_IN + " with routing key: " + routingKey);
+            Console.WriteLine("<--Listening for messages on exchange: " + Queues.RULEBASEFETCHER_OUT + " with routing key: " + routingKey);
 
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(EXCHANGE_IN, routingKey, (object model, BasicDeliverEventArgs ea) =>
+            HandleMessaging.RecieveMessage(Queues.RULEBASEFETCHER_OUT, routingKey, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on exchange: " + EXCHANGE_IN);
+                Console.WriteLine("<--Message recieved on exchange: " + Queues.RULEBASEFETCHER_OUT);
 
                 LoanRequest loanRequest;
 
@@ -48,9 +46,10 @@ namespace TranslatorJSON
 
         private static void handleRabbitMQJSONBank(LoanRequest loanRequest)
         {
+            //TODO: Hvad er exchangen cphbusiness.bankJSON?
             //SSN;CreditScore;Amount;Duration
             string msg = string.Format("{\"ssn\":{0},\"creditScore\":{1},\"loanAmount\":{2},\"loanDuration\":{3}}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
-            LoanBroker.Utility.HandleMessaging.SendMessage("cphbusiness.bankJSON", QUEUE_OUT, msg, "fanout");
+            HandleMessaging.SendMessage("cphbusiness.bankJSON", Queues.RABBITMQJSONBANK_OUT, msg, "fanout");
         }
     }
 }
