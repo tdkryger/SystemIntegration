@@ -30,7 +30,7 @@ namespace RabbitMQBank
                 int duration = 0;
                 int.TryParse(parts[3], out duration);
 
-                decimal sendMessage = SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore, amount, duration);
+                decimal sendMessage = BankingUtility.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
                 Console.WriteLine("<--Sending message on queue: " + Queues.BANK_OUT + " > " + sendMessage.ToString());
                 Console.WriteLine();

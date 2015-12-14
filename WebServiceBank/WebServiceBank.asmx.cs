@@ -1,4 +1,5 @@
-﻿using System.Web.Services;
+﻿using LoanBroker.Utility;
+using System.Web.Services;
 
 namespace WebServiceBank
 {
@@ -15,7 +16,7 @@ namespace WebServiceBank
         [WebMethod]
         public decimal ProcessLoanRequest(string ssn, int creditScore, decimal amount, int duration)
         {
-            return SimpleBank.Bank.ProcessLoanRequest(ssn, creditScore,  amount, duration);
+            return BankingUtility.ProcessLoanRequest(ssn, creditScore,  amount, duration);
         }
     }
 }
