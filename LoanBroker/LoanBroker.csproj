@@ -72,6 +72,7 @@
     <Content Include="Documents\Links.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Documents\ClassDiagram.cd" />
     <None Include="Documents\Component Diagram.uxf" />
     <None Include="packages.config" />
   </ItemGroup>
