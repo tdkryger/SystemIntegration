@@ -30,20 +30,23 @@ namespace RuleBaseService
             {
                 Id = 0,
                 Name = "Bank0",
+                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQJSONBank
             };
 
             bank1 = new Bank()
             {
                 Id = 1,
                 Name = "Bank1",
-                MinAmount = 123
+                MinAmount = 123,
+                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQOURBank
             };
 
             bank2 = new Bank()
             {
                 Id = 2,
                 Name = "Bank2",
-                MinCreditScore = 678
+                MinCreditScore = 678,
+                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQXMLBank
             };
 
             bank3 = new Bank()
@@ -52,7 +55,8 @@ namespace RuleBaseService
                 Name = "Bank3",
                 MinAmount = 100,
                 MinDuration = 12,
-                MinCreditScore = 234
+                MinCreditScore = 234,
+                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_WebServiceBank
             };
 
             AddABank(JsonConvert.SerializeObject(bank0));

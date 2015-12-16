@@ -11,19 +11,19 @@ namespace TranslatorWeb
     {
         static void Main(string[] args)
         {
-            if (args.Length < 1)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.Error.WriteLine("Usage: {0} [routingkey]", Environment.GetCommandLineArgs()[0]);
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.WriteLine(" Press [enter] to exit.");
+            //if (args.Length < 1)
+            //{
+            //    Console.BackgroundColor = ConsoleColor.Red;
+            //    Console.Error.WriteLine("Usage: {0} [routingkey]", Environment.GetCommandLineArgs()[0]);
+            //    Console.BackgroundColor = ConsoleColor.Black;
+            //    Console.WriteLine(" Press [enter] to exit.");
 
-                Console.ReadLine();
-                Environment.ExitCode = 1;
-                return;
-            }
+            //    Console.ReadLine();
+            //    Environment.ExitCode = 1;
+            //    return;
+            //}
 
-            string routingKey = args[0];
+            string routingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_WebServiceBank;
 
             Console.WriteLine("<--Listening for messages on exchange: " + Queues.RULEBASEFETCHER_OUT + " with routing key: " + routingKey);
 

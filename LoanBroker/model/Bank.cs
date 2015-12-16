@@ -30,6 +30,11 @@ namespace LoanBroker.model
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Routing key for the bank on RabbitMQ
+        /// </summary>
+        public string RoutingKey { get; set; }
+
         public int MinCreditScore { get; set; }
         public int MaxCreditScore { get; set; }
         public Decimal MinAmount { get; set; }
