@@ -164,19 +164,43 @@ namespace LoanBroker.Utility
         /// <param name="routingKey">the routing key</param>
         /// <param name="method">The method to call when the declared queue recieves a message</param>
         /// /// <param name="exchangeType">Type of exchange. Defaults to direct</param>
-        public static EventingBasicConsumer RecieveMessage(string exchangeName, string routingKey, EventHandler<BasicDeliverEventArgs> method, string exchangeType = "direct")
+        public static EventingBasicConsumer RecieveMessage(string exchangeName, string queueName, string routingKey, EventHandler<BasicDeliverEventArgs> method, string exchangeType = "direct")
         {
             EventingBasicConsumer consumer;
             
             Channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
 
-            string queueName = Channel.QueueDeclare().QueueName;
+            /* Throws exception
+                RabbitMQ.Client.Exceptions.OperationInterruptedException was unhandled
+                  HResult=-2146233088
+                  Message=The AMQP operation was interrupted: AMQP close-reason, initiated by Peer, code=405, text="RESOURCE_LOCKED - cannot obtain exclusive access to locked queue 'amq.gen-RPId4meIjKZUz0lXGeBqrQ' in vhost '/'", classId=50, methodId=20, cause=
+                  Source=RabbitMQ.Client
+                  StackTrace:
+                       at RabbitMQ.Client.Impl.SimpleBlockingRpcContinuation.GetReply()
+                       at RabbitMQ.Client.Impl.ModelBase.ModelRpc(MethodBase method, ContentHeaderBase header, Byte[] body)
+                       at RabbitMQ.Client.Framing.Impl.Model._Private_QueueBind(String queue, String exchange, String routingKey, Boolean nowait, IDictionary`2 arguments)
+                       at RabbitMQ.Client.Impl.ModelBase.QueueBind(String queue, String exchange, String routingKey)
+                       at LoanBroker.Utility.HandleMessaging.RecieveMessage(String exchangeName, String routingKey, EventHandler`1 method, String exchangeType) in D:\Dropbox\Visual Studio 2015\SystemIntegration\SimpleBank\LoanBroker\Utility\HandleMessaging.cs:line 181
+                       at TranslatorJSON.TranslatorJSON.Main(String[] args) in D:\Dropbox\Visual Studio 2015\SystemIntegration\SimpleBank\TranslatorJSON\TranslatorJSON.cs:line 30
+                       at System.AppDomain._nExecuteAssembly(RuntimeAssembly assembly, String[] args)
+                       at System.AppDomain.ExecuteAssembly(String assemblyFile, Evidence assemblySecurity, String[] args)
+                       at Microsoft.VisualStudio.HostingProcess.HostProc.RunUsersAssembly()
+                       at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+                       at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+                       at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+                       at System.Threading.ThreadHelper.ThreadStart()
+                  InnerException: 
 
-            Channel.QueueDeclare(queue: queueName, 
-                                 durable: false, 
-                                 exclusive: false, 
-                                 autoDelete: false, 
+                So queueName is now a parameter
+            */
+            //string queueName = Channel.QueueDeclare().QueueName;
+
+            Channel.QueueDeclare(queue: queueName,
+                                durable: false,
+                                 exclusive: false,
+                                 autoDelete: false,
                                  arguments: null);
+
             Channel.QueueBind(queue: queueName, 
                               exchange: exchangeName, 
                               routingKey: routingKey);

@@ -11,11 +11,11 @@ namespace LoanBroker
     abstract class TranslatorBase
     {
         #region Public methods
-        public void SendMessage(string routingKey, string exchangeName)
+        public void SendMessage(string routingKey, string exchangeName, string queueName)
         {
             Console.WriteLine("<--Listening for messages on exchange: " + exchangeName + " with routing key: " + routingKey);
 
-            LoanBroker.Utility.HandleMessaging.RecieveMessage(exchangeName, routingKey, (object model, BasicDeliverEventArgs ea) =>
+            LoanBroker.Utility.HandleMessaging.RecieveMessage(exchangeName, queueName, routingKey, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on exchange: " + exchangeName);
 

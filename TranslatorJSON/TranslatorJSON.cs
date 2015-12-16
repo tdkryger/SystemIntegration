@@ -27,7 +27,7 @@ namespace TranslatorJSON
 
             Console.WriteLine("<--Listening for messages on exchange: " + Queues.RULEBASEFETCHER_OUT + " with routing key: " + routingKey);
 
-            HandleMessaging.RecieveMessage(Queues.RULEBASEFETCHER_OUT, routingKey, (object model, BasicDeliverEventArgs ea) =>
+            HandleMessaging.RecieveMessage(Queues.RULEBASEFETCHER_OUT, string.Format("QUEUE_{0}", routingKey), routingKey, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on exchange: " + Queues.RULEBASEFETCHER_OUT);
 
