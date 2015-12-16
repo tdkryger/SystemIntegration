@@ -43,7 +43,8 @@ namespace LoanBrokerWebService
             };
             string returnString = "Could not send the message";
 
-            if (HandleMessaging.SendMessage<LoanBroker.model.LoanRequest>(Queues.LOANBROKER_OUT, loanRequest))
+
+            if (HandleMessaging.SendMessage<LoanBroker.model.LoanRequest>(Queues.LOANBROKER_IN, loanRequest))
             {
                 returnString = blockingRead(loanRequest);
             }
@@ -63,7 +64,7 @@ namespace LoanBrokerWebService
             {
                 using (var channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: Queues.LOANBROKER_IN,
+                    channel.QueueDeclare(queue: Queues.LOANBROKER_OUT,
                                          durable: false,
                                          exclusive: false,
                                          autoDelete: false,
@@ -72,7 +73,7 @@ namespace LoanBrokerWebService
                     channel.BasicQos(0, 1, false); // Get one at the time
 
                     var consumer = new QueueingBasicConsumer(channel);
-                    channel.BasicConsume(queue: Queues.LOANBROKER_IN,
+                    channel.BasicConsume(queue: Queues.LOANBROKER_OUT,
                                          noAck: false,
                                          consumer: consumer);
                     bool weDontHaveIt = true;
