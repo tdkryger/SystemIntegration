@@ -1,4 +1,4 @@
-﻿using LoanBroker.model;
+﻿//using LoanBroker.model;
 using LoanBroker.Utility;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -12,11 +12,11 @@ namespace LoanBrokerWebService
     /// <summary>
     /// Summary description for LoanBroker
     /// </summary>
-    [WebService(Namespace = "http://loanbroker.com/")]
+    [WebService(Namespace = "http://loanbrokerservicethingybusiness.some/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    [System.Web.Script.Services.ScriptService]
+    //[System.Web.Script.Services.ScriptService]
     public class LoanBrokerService : System.Web.Services.WebService
     {
         /*
@@ -35,7 +35,7 @@ namespace LoanBrokerWebService
         [WebMethod]
         public string GetLoanQuoute(string ssn, decimal amount, int duration)
         {
-            LoanRequest loanRequest = new LoanRequest()
+            LoanBroker.model.LoanRequest loanRequest = new LoanBroker.model.LoanRequest()
             {
                 Amount = amount,
                 Duration = duration,
@@ -43,7 +43,7 @@ namespace LoanBrokerWebService
             };
             string returnString = "Could not send the message";
 
-            if (HandleMessaging.SendMessage<LoanRequest>(Queues.LOANBROKER_OUT, loanRequest))
+            if (HandleMessaging.SendMessage<LoanBroker.model.LoanRequest>(Queues.LOANBROKER_OUT, loanRequest))
             {
                 returnString = blockingRead(loanRequest);
             }
@@ -52,7 +52,7 @@ namespace LoanBrokerWebService
         #endregion
 
         #region Private Methods
-        private string blockingRead(LoanRequest loanRequest)
+        private string blockingRead(LoanBroker.model.LoanRequest loanRequest)
         {
             string returnString = "Could not send the message";
             var factory = new ConnectionFactory()
@@ -80,7 +80,7 @@ namespace LoanBrokerWebService
                     while (weDontHaveIt)
                     {
                         BasicDeliverEventArgs ea = consumer.Queue.Dequeue();
-                        LoanResponse loanResponse = JsonConvert.DeserializeObject<LoanResponse>(Encoding.UTF8.GetString(ea.Body));
+                        LoanBroker.model.LoanResponse loanResponse = JsonConvert.DeserializeObject<LoanBroker.model.LoanResponse>(Encoding.UTF8.GetString(ea.Body));
                         if (loanRequest.SSN == loanResponse.SSN)
                         {
                             weDontHaveIt = false;
@@ -99,7 +99,7 @@ namespace LoanBrokerWebService
         }
 
         [Obsolete("nonBlockingRead is still blocking, just somewhere else.. This is worse than the blockingRead, as this could sleep atleast 5ms. Please use blockingRead instead.")]
-        private string nonBlockingRead(LoanRequest loanRequest)
+        private string nonBlockingRead(LoanBroker.model.LoanRequest loanRequest)
         {
             string returnString = "Could not send the message";
 
@@ -118,7 +118,7 @@ namespace LoanBrokerWebService
 
                 consumer.Received += (model, ea) =>
                 {
-                    LoanResponse loanResponse = JsonConvert.DeserializeObject<LoanResponse>(Encoding.UTF8.GetString(ea.Body));
+                    LoanBroker.model.LoanResponse loanResponse = JsonConvert.DeserializeObject<LoanBroker.model.LoanResponse>(Encoding.UTF8.GetString(ea.Body));
                     if (loanResponse.SSN == loanRequest.SSN)
                     {
                         weDontHaveIt = false;
