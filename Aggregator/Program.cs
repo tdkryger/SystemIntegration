@@ -64,7 +64,7 @@ namespace Aggregator
                         {
                             // Do some sweet aggregating!
                             //responeList[ssn].LoanResponses.Sort(new LoanResponseComparer());
-                            int idx = -1;
+                            int idx =int.MinValue;
                             decimal LowestOutPut = decimal.MaxValue;
                             for (int i = 0; i < responeList[ssn].LoanResponses.Count; i++)
                             {
@@ -75,10 +75,12 @@ namespace Aggregator
                                 }
                             }
 
-
-                            Console.WriteLine("<--Sending message on queue: " + Queues.AGGREGATOR_OUT);
-                            Console.WriteLine();
-                            HandleMessaging.SendMessage<LoanResponse>(Queues.AGGREGATOR_OUT, responeList[ssn].LoanResponses[idx]);
+                            if (idx > int.MinValue)
+                            {
+                                Console.WriteLine("<--Sending message on queue: " + Queues.AGGREGATOR_OUT);
+                                Console.WriteLine();
+                                HandleMessaging.SendMessage<LoanResponse>(Queues.AGGREGATOR_OUT, responeList[ssn].LoanResponses[idx]);
+                            }
                         }
                     }
                 }
