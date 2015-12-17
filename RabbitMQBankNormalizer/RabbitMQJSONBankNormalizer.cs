@@ -38,21 +38,24 @@ namespace RabbitMQJSONBankNormalizer
                 Console.WriteLine();
                 HandleMessaging.SendMessage<LoanResponse>(Queues.NORMALIZER_OUT, loanResponse);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    /*
-                       String format from pdf:
-                       string msg = "{\"ssn\":" + loanRequest.SSN + ",\"creditScore\":" + loanRequest.CreditScore.ToString() +  
-                           ",\"loanAmount\":" + loanRequest.Amount.ToString() + ",\"loanDuration\":" + loanRequest.Duration +" }";
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine(ex.Message);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                /*
+                   String format from pdf:
+                   string msg = "{\"ssn\":" + loanRequest.SSN + ",\"creditScore\":" + loanRequest.CreditScore.ToString() +  
+                       ",\"loanAmount\":" + loanRequest.Amount.ToString() + ",\"loanDuration\":" + loanRequest.Duration +" }";
 
-                       but getting this from the bank:
+                   but getting this from the bank:
 
-                       Exception: Something went wrong.Data should be sent like: { "ssn":1605789787,"loanAmount":10.0,"loanDuration":360,"rki":false}
-                       Can not instantiate value of type[simple type, class dk.cphbusiness.si.banktemplate.JsonDTO.BankLoanDTO] from JSON String; no single-String constructor/factory method
+                   Exception: Something went wrong.Data should be sent like: { "ssn":1605789787,"loanAmount":10.0,"loanDuration":360,"rki":false}
+                   Can not instantiate value of type[simple type, class dk.cphbusiness.si.banktemplate.JsonDTO.BankLoanDTO] from JSON String; no single-String constructor/factory method
 
-                        Gonna send the pdf version, and just catch the exception here...
-                    */
-                }
+                    Gonna send the pdf version, and just catch the exception here...
+                */
+            }
             });
         }
 
