@@ -13,7 +13,9 @@ namespace RuleBaseFetcher
     {
         public static void Main(string[] args)
         {
-            Console.Title = "RuleBase Fetcher";
+            Console.Title = "2 - RuleBase Fetcher";
+            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(80, 5);
             Console.WriteLine("<--Listening for messages on queue: " + Queues.CREDITBUREAU_OUT);
             HandleMessaging.RecieveMessage(Queues.CREDITBUREAU_OUT, (object model, BasicDeliverEventArgs ea) =>
             {

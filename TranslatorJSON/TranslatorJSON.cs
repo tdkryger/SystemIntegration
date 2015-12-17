@@ -12,6 +12,8 @@ namespace TranslatorJSON
         static void Main(string[] args)
         {
             Console.Title = "Translator JSON";
+            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(80, 5);
             //if (args.Length < 1)
             //{
             //    Console.BackgroundColor = ConsoleColor.Red;

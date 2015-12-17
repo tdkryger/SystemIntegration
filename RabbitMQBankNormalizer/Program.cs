@@ -12,6 +12,8 @@ namespace RabbitMQJSONBankNormalizer
         public static void Main(string[] args)
         {
             Console.Title = "RabbitMQJSONBankNormalizer";
+            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(80, 5);
             HandleMessaging.RecieveMessage(Queues.RABBITMQJSONBANK_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + Queues.RABBITMQJSONBANK_OUT);

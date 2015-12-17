@@ -12,6 +12,8 @@ namespace RecipientList
         public static void Main(string[] args)
         {
             Console.Title = "RecipientList";
+            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(80, 5);
             Console.WriteLine("<--Listening for messages on queue: " + Queues.BANKFETCHER_OUT);
             HandleMessaging.RecieveMessage(Queues.BANKFETCHER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {

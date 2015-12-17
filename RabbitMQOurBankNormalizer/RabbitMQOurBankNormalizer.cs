@@ -12,6 +12,8 @@ namespace RabbitMQOurBankNormalizer
         public static void Main(string[] args)
         {
             Console.Title = "RabbitMQOurBankNormalizer";
+            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(80, 5);
             HandleMessaging.RecieveMessage(Queues.RABBITMQOURBANK_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + Queues.RABBITMQOURBANK_OUT);

@@ -33,6 +33,8 @@ namespace Aggregator
         public static void Main(string[] args)
         {
             Console.Title = "Aggregator";
+            Console.SetWindowPosition(0, 50);
+            Console.SetWindowSize(80, 5);
             HandleMessaging.RecieveMessage(Queues.NORMALIZER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + Queues.NORMALIZER_OUT);

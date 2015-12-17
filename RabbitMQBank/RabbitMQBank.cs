@@ -11,6 +11,8 @@ namespace RabbitMQBank
         static void Main(string[] args)
         {
             Console.Title = "RabbitMQBank";
+            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(80, 5);
             Console.WriteLine("<--Listening for messages on queue: " + Queues.DELEGATER_OUT);
             HandleMessaging.RecieveMessage(Queues.DELEGATER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
