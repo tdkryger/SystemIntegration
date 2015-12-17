@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceBank", "WebServiceBank\WebServiceBank.csproj", "{544FA518-9DBF-4B05-A6E6-B919564C4183}"
 EndProject
@@ -43,6 +43,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQOurBankNormalizer", "RabbitMQOurBankNormalizer\RabbitMQOurBankNormalizer.csproj", "{BE85D757-5D2F-4BC2-B2B6-DC247F1CF185}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aggregator", "Aggregator\Aggregator.csproj", "{7793D9A6-78D5-482E-92D3-E4B1866E7C18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CPHB.JSONBank", "Test.CPHB.JSONBank\Test.CPHB.JSONBank.csproj", "{09A4AB97-7BB3-42C9-90EF-DB112FF472BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -126,6 +128,10 @@ Global
 		{7793D9A6-78D5-482E-92D3-E4B1866E7C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7793D9A6-78D5-482E-92D3-E4B1866E7C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7793D9A6-78D5-482E-92D3-E4B1866E7C18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09A4AB97-7BB3-42C9-90EF-DB112FF472BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A4AB97-7BB3-42C9-90EF-DB112FF472BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09A4AB97-7BB3-42C9-90EF-DB112FF472BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09A4AB97-7BB3-42C9-90EF-DB112FF472BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

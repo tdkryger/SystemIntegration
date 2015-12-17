@@ -3,6 +3,7 @@ using LoanBroker.Utility;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
+using System.Globalization;
 using System.Text;
 
 namespace TranslatorJSON
@@ -13,17 +14,6 @@ namespace TranslatorJSON
         {
             Console.Title = "Translator JSON";
             Console.SetWindowSize(80, 5);
-            //if (args.Length < 1)
-            //{
-            //    Console.BackgroundColor = ConsoleColor.Red;
-            //    Console.Error.WriteLine("Usage: {0} [routingkey]", Environment.GetCommandLineArgs()[0]);
-            //    Console.BackgroundColor = ConsoleColor.Black;
-            //    Console.WriteLine(" Press [enter] to exit.");
-
-            //    Console.ReadLine();
-            //    Environment.ExitCode = 1;
-            //    return;
-            //}
 
             string routingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQJSONBank;
 
@@ -41,26 +31,35 @@ namespace TranslatorJSON
                 Console.WriteLine("<--" + loanRequest);
                 Console.WriteLine();
 
-                handleRabbitMQJSONBank(loanRequest);
+                handleRabbitMQJSONBank(loanRequest, routingKey);
             }
             );
         }
 
-        private static void handleRabbitMQJSONBank(LoanRequest loanRequest)
+        private static void handleRabbitMQJSONBank(LoanRequest loanRequest, string routingKey)
         {
-            //TODO: Hvad er exchangen cphbusiness.bankJSON?
-            //SSN;CreditScore;Amount;Duration
-
+            /*
+            String format from pdf:
             string msg = "{\"ssn\":" + loanRequest.SSN + ",\"creditScore\":" + loanRequest.CreditScore.ToString() +  
                 ",\"loanAmount\":" + loanRequest.Amount.ToString() + ",\"loanDuration\":" + loanRequest.Duration +" }";
 
-            //TDK: Throws an exception
-            //string msg = string.Format(frmString, 
-            //    loanRequest.SSN, 
-            //    loanRequest.CreditScore.ToString(), 
-            //    loanRequest.Amount.ToString(), 
-            //    loanRequest.Duration.ToString()); 
-            HandleMessaging.SendMessage("cphbusiness.bankJSON", Queues.RABBITMQJSONBANK_OUT, msg, "fanout");
+            but getting this from the bank:
+
+            Exception: Something went wrong.Data should be sent like: { "ssn":1605789787,"loanAmount":10.0,"loanDuration":360,"rki":false}
+            Can not instantiate value of type[simple type, class dk.cphbusiness.si.banktemplate.JsonDTO.BankLoanDTO] from JSON String; no single-String constructor/factory method
+
+            */
+            //string msg = "{ \"ssn\":" + loanRequest.SSN
+            //    + ",\"loanAmount\":" + loanRequest.Amount.ToString(CultureInfo.CreateSpecificCulture("en-GB"))
+            //    + ",\"loanDuration\":" + loanRequest.Duration.ToString()
+            //    + ",\"rki\":false }";
+            string msg = "{ \"ssn\":" + loanRequest.SSN.Replace("-", "")
+                + ",\"creditScore\":"  + loanRequest.CreditScore.ToString()
+                + ",\"loanAmount\":" + loanRequest.Amount.ToString(CultureInfo.CreateSpecificCulture("en-GB")) 
+                + ",\"loanDuration\":" + loanRequest.Duration + " }";
+
+            Console.WriteLine("--> Sending " + msg + " to cphbusiness.bankJSON");
+            HandleMessaging.SendMessage("cphbusiness.bankJSON", routingKey, Queues.RABBITMQJSONBANK_OUT, msg, "fanout");
         }
     }
 }
