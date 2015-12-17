@@ -5,6 +5,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
+using System.Timers;
 using System.Web.Services;
 
 namespace LoanBrokerWebService
@@ -24,6 +25,8 @@ namespace LoanBrokerWebService
             any status updates while waiting on the result
         */
 
+        private const long TIMEOUT = 60000;
+
         #region Public Methods
         /// <summary>
         /// Get a loan quoute
@@ -42,6 +45,8 @@ namespace LoanBrokerWebService
                 SSN = ssn
             };
             string returnString = "Could not send the message";
+
+            // Do some stupid looping and "delete" old messages?
 
 
             if (HandleMessaging.SendMessage<LoanBroker.model.LoanRequest>(Queues.LOANBROKER_IN, loanRequest))
@@ -70,45 +75,46 @@ namespace LoanBrokerWebService
                                          autoDelete: false,
                                          arguments: null);
 
-                    channel.BasicQos(0, 1, false); // Get one at the time
+                    channel.BasicQos(0, 1, false); // Get one at the time.
 
                     var consumer = new QueueingBasicConsumer(channel);
                     channel.BasicConsume(queue: Queues.LOANBROKER_OUT,
                                          noAck: false,
                                          consumer: consumer);
                     bool weDontHaveIt = true;
-
-                    int loopCount = 0;
-
-                    while (weDontHaveIt)
+                    using (Timer _timeOutTimer = new Timer(TIMEOUT))
                     {
-                        //Looks like the items stays in the queue
-                        BasicDeliverEventArgs ea = consumer.Queue.Dequeue();
-                        LoanBroker.model.LoanResponse loanResponse = JsonConvert.DeserializeObject<LoanBroker.model.LoanResponse>(Encoding.UTF8.GetString(ea.Body));
-                        if (loanRequest.SSN == loanResponse.SSN)
+                        _timeOutTimer.Enabled = true;
+                        _timeOutTimer.Elapsed += _timeOutTimer_Elapsed;
+
+                        while (weDontHaveIt)
                         {
-                            weDontHaveIt = false;
-                            returnString = JsonConvert.SerializeObject(loanResponse);
-                        }
-                        else
-                        {
-                            // Old messages in the queue. Should use message TTL in aggregator
-                            if (loopCount < 5000)
+                            //Looks like the items stays in the queue
+                            BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+                            LoanBroker.model.LoanResponse loanResponse = JsonConvert.DeserializeObject<LoanBroker.model.LoanResponse>(Encoding.UTF8.GetString(ea.Body));
+                            if (loanRequest.SSN == loanResponse.SSN)
+                            {
+                                weDontHaveIt = false;
+                                returnString = JsonConvert.SerializeObject(loanResponse);
+                                channel.BasicAck(ea.DeliveryTag, false);
+                            }
+                            else
                             {
                                 // Return it to the queue
                                 // what is the difference between true and false?
-                                channel.BasicReject(ea.DeliveryTag, false);
+                                //channel.BasicReject(ea.DeliveryTag, false);
                                 //channel.BasicReject(ea.DeliveryTag, true);
                             }
-                            else
-                                loopCount = 0;
                         }
-                        loopCount++;
-
                     }
                 }
             }
             return returnString;
+        }
+
+        private void _timeOutTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            throw new TimeoutException("Timeout while waiting for response from loan broker");
         }
 
         [Obsolete("nonBlockingRead is still blocking, just somewhere else.. This is worse than the blockingRead, as this could sleep atleast 5ms. Please use blockingRead instead.")]
