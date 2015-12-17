@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Aggregator
 {
-    public class Program
+    public class Aggregator
     {
         private static long TIMEOUT = 6500;
         private static int MIN_BANK_RESPONSES = 4;
@@ -32,6 +32,7 @@ namespace Aggregator
 
         public static void Main(string[] args)
         {
+            Console.Title = "Aggregator";
             HandleMessaging.RecieveMessage(Queues.NORMALIZER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + Queues.NORMALIZER_OUT);

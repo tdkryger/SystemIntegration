@@ -11,6 +11,7 @@ namespace CreditScoreFetcher
     {
         public static void Main(string[] args)
         {
+            Console.Title = "Credit Score Fetcher";
             Console.WriteLine("<--Listening for messages on queue: " + Queues.LOANBROKER_IN);
             HandleMessaging.RecieveMessage(Queues.LOANBROKER_IN, (object model, BasicDeliverEventArgs ea) =>
             {

@@ -11,6 +11,7 @@ namespace TranslatorJSON
     {
         static void Main(string[] args)
         {
+            Console.Title = "Translator JSON";
             //if (args.Length < 1)
             //{
             //    Console.BackgroundColor = ConsoleColor.Red;
@@ -48,7 +49,16 @@ namespace TranslatorJSON
         {
             //TODO: Hvad er exchangen cphbusiness.bankJSON?
             //SSN;CreditScore;Amount;Duration
-            string msg = string.Format("{\"ssn\":{0},\"creditScore\":{1},\"loanAmount\":{2},\"loanDuration\":{3}}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
+
+            string msg = "{\"ssn\":" + loanRequest.SSN + ",\"creditScore\":" + loanRequest.CreditScore.ToString() +  
+                ",\"loanAmount\":" + loanRequest.Amount.ToString() + ",\"loanDuration\":" + loanRequest.Duration +" }";
+
+            //TDK: Throws an exception
+            //string msg = string.Format(frmString, 
+            //    loanRequest.SSN, 
+            //    loanRequest.CreditScore.ToString(), 
+            //    loanRequest.Amount.ToString(), 
+            //    loanRequest.Duration.ToString()); 
             HandleMessaging.SendMessage("cphbusiness.bankJSON", Queues.RABBITMQJSONBANK_OUT, msg, "fanout");
         }
     }

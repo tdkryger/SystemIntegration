@@ -11,6 +11,7 @@ namespace TranslatorWeb
     {
         static void Main(string[] args)
         {
+            Console.Title = "Translator Web";
             //if (args.Length < 1)
             //{
             //    Console.BackgroundColor = ConsoleColor.Red;

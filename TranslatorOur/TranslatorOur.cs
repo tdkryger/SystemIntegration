@@ -11,6 +11,7 @@ namespace TranslatorOur
     {
         static void Main(string[] args)
         {
+            Console.Title = "Translator Our";
             //if (args.Length < 1)
             //{
             //    Console.BackgroundColor = ConsoleColor.Red;

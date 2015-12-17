@@ -51,6 +51,7 @@
     <Compile Include="model\Bank.cs" />
     <Compile Include="model\LoanRequest.cs" />
     <Compile Include="model\LoanResponse.cs" />
+    <Compile Include="model\OurBankResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

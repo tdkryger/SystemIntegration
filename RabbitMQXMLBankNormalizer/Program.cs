@@ -11,6 +11,7 @@ namespace RabbitMQXMLBankNormalizer
     {
         public static void Main(string[] args)
         {
+            Console.Title = "RabbitMQXMLBankNormalizer";
             HandleMessaging.RecieveMessage(Queues.RABBITMQXMLBANK_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + Queues.RABBITMQXMLBANK_OUT);

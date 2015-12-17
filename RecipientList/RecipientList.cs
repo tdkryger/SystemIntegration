@@ -11,6 +11,7 @@ namespace RecipientList
     {
         public static void Main(string[] args)
         {
+            Console.Title = "RecipientList";
             Console.WriteLine("<--Listening for messages on queue: " + Queues.BANKFETCHER_OUT);
             HandleMessaging.RecieveMessage(Queues.BANKFETCHER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {

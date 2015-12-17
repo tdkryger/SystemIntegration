@@ -11,6 +11,7 @@ namespace TranslatorXML
     {
         static void Main(string[] args)
         {
+            Console.Title = "Translator XML";
             //if (args.Length < 1)
             //{
             //    Console.BackgroundColor = ConsoleColor.Red;

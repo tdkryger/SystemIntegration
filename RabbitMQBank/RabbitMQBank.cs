@@ -1,4 +1,5 @@
 ﻿using LoanBroker.Utility;
+using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
@@ -9,6 +10,7 @@ namespace RabbitMQBank
     {
         static void Main(string[] args)
         {
+            Console.Title = "RabbitMQBank";
             Console.WriteLine("<--Listening for messages on queue: " + Queues.DELEGATER_OUT);
             HandleMessaging.RecieveMessage(Queues.DELEGATER_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
@@ -30,12 +32,21 @@ namespace RabbitMQBank
                 int duration = 0;
                 int.TryParse(parts[3], out duration);
 
-                decimal sendMessage = BankingUtility.ProcessLoanRequest(ssn, creditScore, amount, duration);
+                LoanBroker.model.OurBankResponse bankResponse = new LoanBroker.model.OurBankResponse()
+                {
+                    InterestRate = BankingUtility.ProcessLoanRequest(ssn, creditScore, amount, duration),
+                    Name = "Our RabbitMQ Bank",
+                    SSN = ssn
+                };
 
-                Console.WriteLine("<--Sending message on queue: " + Queues.BANK_OUT + " > " + sendMessage.ToString());
+                //decimal sendMessage = BankingUtility.ProcessLoanRequest(ssn, creditScore, amount, duration);
+
+                string msg = JsonConvert.SerializeObject(bankResponse);
+
+                Console.WriteLine("<--Sending message on queue: " + Queues.BANK_OUT + " > " + msg);
                 Console.WriteLine();
 
-                HandleMessaging.SendMessage<decimal>(Queues.BANK_OUT, sendMessage);
+                HandleMessaging.SendMessage<LoanBroker.model.OurBankResponse>(Queues.BANK_OUT, bankResponse);
             });
         }
     }

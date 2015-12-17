@@ -7,10 +7,11 @@ using System.Text;
 
 namespace RabbitMQOurBankNormalizer
 {
-    public class Program
+    public class RabbitMQOurBankNormalizer
     {
         public static void Main(string[] args)
         {
+            Console.Title = "RabbitMQOurBankNormalizer";
             HandleMessaging.RecieveMessage(Queues.RABBITMQOURBANK_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
                 Console.WriteLine("<--Message recieved on queue: " + Queues.RABBITMQOURBANK_OUT);
@@ -32,11 +33,6 @@ namespace RabbitMQOurBankNormalizer
             });
         }
 
-        private class OurBankResponse
-        {
-            public string Name { get; set; }
-            public string SSN { get; set; }
-            public decimal InterestRate { get; set; }
-        }
+
     }
 }
