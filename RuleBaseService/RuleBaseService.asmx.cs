@@ -24,45 +24,48 @@ namespace RuleBaseService
 
         public RuleBaseService() : base()
         {
-            Bank bank0, bank1, bank2, bank3;
-
-            bank0 = new Bank()
+            if (_banks.Count == 0)
             {
-                Id = 0,
-                Name = "Bank0",
-                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQJSONBank
-            };
+                Bank bank0, bank1, bank2, bank3;
 
-            bank1 = new Bank()
-            {
-                Id = 1,
-                Name = "Bank1",
-                MinAmount = 123,
-                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQOURBank
-            };
+                bank0 = new Bank()
+                {
+                    Id = 0,
+                    Name = "RabbitMQ JSON Bank",
+                    RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQJSONBank
+                };
 
-            bank2 = new Bank()
-            {
-                Id = 2,
-                Name = "Bank2",
-                MinCreditScore = 678,
-                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQXMLBank
-            };
+                bank1 = new Bank()
+                {
+                    Id = 1,
+                    Name = "RabbitMQ OUR Bank",
+                    //MinAmount = 123,
+                    RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQOURBank
+                };
 
-            bank3 = new Bank()
-            {
-                Id = 3,
-                Name = "Bank3",
-                MinAmount = 100,
-                MinDuration = 12,
-                MinCreditScore = 234,
-                RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_WebServiceBank
-            };
+                bank2 = new Bank()
+                {
+                    Id = 2,
+                    Name = "RabbitMQ XML Bank",
+                    //MinCreditScore = 678,
+                    RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQXMLBank
+                };
 
-            AddABank(JsonConvert.SerializeObject(bank0));
-            AddABank(JsonConvert.SerializeObject(bank1));
-            AddABank(JsonConvert.SerializeObject(bank2));
-            AddABank(JsonConvert.SerializeObject(bank3));
+                bank3 = new Bank()
+                {
+                    Id = 3,
+                    Name = "Web Service Bank",
+                    //MinAmount = 100,
+                    //MinDuration = 12,
+                    //MinCreditScore = 234,
+                    RoutingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_WebServiceBank
+                };
+
+                AddABank(JsonConvert.SerializeObject(bank0));
+                AddABank(JsonConvert.SerializeObject(bank1));
+                AddABank(JsonConvert.SerializeObject(bank2));
+                AddABank(JsonConvert.SerializeObject(bank3));
+            }
         }
 
         #region private methods
