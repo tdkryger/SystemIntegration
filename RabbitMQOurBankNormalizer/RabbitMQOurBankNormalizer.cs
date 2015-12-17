@@ -19,6 +19,7 @@ namespace RabbitMQOurBankNormalizer
                 LoanResponse loanResponse;
                 OurBankResponse bankResponse;
 
+                //TODO: TDK: Error here.. Gets a loan request and not a ourbankresponse
                 bankResponse = JsonConvert.DeserializeObject<OurBankResponse>(Encoding.UTF8.GetString(ea.Body));
                 loanResponse = new LoanResponse()
                 {
