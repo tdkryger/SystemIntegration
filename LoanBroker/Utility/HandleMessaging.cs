@@ -68,7 +68,7 @@ namespace LoanBroker.Utility
         /// <param name="messageObject">The object to send</param>
         /// <param name="TTL">Message time-to-live in ms</param>
         /// <returns></returns>
-        public static bool SendMessage<T>(string queueName, T messageObject, int TTL)
+        public static bool SendMessage<T>(string queueName, T messageObject, long TTL)
         {
             bool result = true; ;
 

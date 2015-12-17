@@ -12,19 +12,7 @@ namespace TranslatorWeb
         static void Main(string[] args)
         {
             Console.Title = "Translator Web";
-            Console.SetWindowPosition(0, 0);
             Console.SetWindowSize(80, 5);
-            //if (args.Length < 1)
-            //{
-            //    Console.BackgroundColor = ConsoleColor.Red;
-            //    Console.Error.WriteLine("Usage: {0} [routingkey]", Environment.GetCommandLineArgs()[0]);
-            //    Console.BackgroundColor = ConsoleColor.Black;
-            //    Console.WriteLine(" Press [enter] to exit.");
-
-            //    Console.ReadLine();
-            //    Environment.ExitCode = 1;
-            //    return;
-            //}
 
             string routingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_WebServiceBank;
 
@@ -52,7 +40,14 @@ namespace TranslatorWeb
             WebServiceBank.WebServiceBank webBank = new WebServiceBank.WebServiceBank();
             decimal msg = webBank.ProcessLoanRequest(loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
             //TODO: Send loanrequest info aswell as decimal msg
-            HandleMessaging.SendMessage<decimal>(Queues.WEBSERVICEBANK_OUT, msg);
+            //HandleMessaging.SendMessage<decimal>(Queues.WEBSERVICEBANK_OUT, msg);
+            LoanResponse loanResponse = new LoanResponse()
+            {
+                SSN = loanRequest.SSN,
+                BankName = "Our Web Bank",
+                InterestRate = msg
+            };
+            HandleMessaging.SendMessage<LoanResponse>(Queues.NORMALIZER_OUT, loanResponse);
         }
     }
 }

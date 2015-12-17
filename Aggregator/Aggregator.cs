@@ -13,7 +13,7 @@ namespace Aggregator
     {
         private static long TIMEOUT = 500;
         private static int MIN_BANK_RESPONSES = 4;
-        private static int TTL = 60000000;
+        private static long TTL = (int)(TIMEOUT * 10);
 
         static readonly object _listLockObject = new object();
 
@@ -38,10 +38,11 @@ namespace Aggregator
 
         public static void Main(string[] args)
         {
-            _timeOut.Interval = TIMEOUT;
+            //A timer to handle timeouts.
+            _timeOut.Interval = TIMEOUT / 10;
             _timeOut.Enabled = true;
             _timeOut.Elapsed += _timeOut_Elapsed;
-            //TODO: A timer to handle timeouts. It could be 1 timer that runs through the list
+
 
             Console.Title = "Aggregator";
             Console.SetWindowSize(80, 5);
@@ -78,8 +79,6 @@ namespace Aggregator
                         _responeList[loanResponse.SSN].LoanResponses.Add(loanResponse);
                     }
                     handleListStuff();
-
-
                 }
                 //else
                 // Throw some exception or logit
@@ -99,7 +98,7 @@ namespace Aggregator
             foreach (string ssn in responeListCopy.Keys)
             {
                 // "Har vi nok banker" eller "timeout" => Behandl og send
-                if (responeListCopy[ssn].LoanResponses.Count >= MIN_BANK_RESPONSES || (responeListCopy[ssn].LastResponseTime < DateTime.Now.AddMilliseconds(TIMEOUT)))
+                if (responeListCopy[ssn].LoanResponses.Count >= MIN_BANK_RESPONSES) //(responeListCopy[ssn].LastResponseTime < DateTime.Now.AddMilliseconds(TIMEOUT)))
                 {
                     // Do some sweet aggregating!
                     //responeList[ssn].LoanResponses.Sort(new LoanResponseComparer());
@@ -117,11 +116,12 @@ namespace Aggregator
                     if (idx > int.MinValue)
                     {
                         Console.WriteLine("<--Sending message on queue: " + Queues.LOANBROKER_OUT);
+                        Console.WriteLine("Amount of bank responses: " + _responeList[ssn].LoanResponses.Count.ToString() + " for SSN: " + ssn);
                         Console.WriteLine();
                         // Need a TTL on this message....
                         HandleMessaging.SendMessage<LoanResponse>(
-                            Queues.LOANBROKER_OUT, 
-                            responeListCopy[ssn].LoanResponses[idx], 
+                            Queues.LOANBROKER_OUT,
+                            responeListCopy[ssn].LoanResponses[idx],
                             TTL);
                         lock (_listLockObject)
                         {
@@ -135,7 +135,52 @@ namespace Aggregator
 
         private static void _timeOut_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (_responeList.Count > 0)
+            {
+                Dictionary<string, Response> responeListCopy = new Dictionary<string, Response>();
+                lock (_listLockObject)
+                {
+                    foreach (string key in _responeList.Keys)
+                    {
+                        responeListCopy.Add(key, _responeList[key]);
+                    }
+                }
+
+                foreach (string ssn in responeListCopy.Keys)
+                {
+                    if (responeListCopy[ssn].LastResponseTime < DateTime.Now.AddMilliseconds(TIMEOUT))
+                    {
+                        // Do some sweet aggregating!
+                        //responeList[ssn].LoanResponses.Sort(new LoanResponseComparer());
+                        int idx = int.MinValue;
+                        decimal LowestOutPut = decimal.MaxValue;
+                        for (int i = 0; i < responeListCopy[ssn].LoanResponses.Count; i++)
+                        {
+                            if (responeListCopy[ssn].LoanResponses[i].InterestRate < LowestOutPut)
+                            {
+                                LowestOutPut = responeListCopy[ssn].LoanResponses[i].InterestRate;
+                                idx = i;
+                            }
+                        }
+
+                        if (idx > int.MinValue)
+                        {
+                            Console.WriteLine("<--Sending message on queue: " + Queues.LOANBROKER_OUT);
+                            Console.WriteLine("Amount of bank responses: " + _responeList[ssn].LoanResponses.Count.ToString() + " for SSN: " + ssn);
+                            Console.WriteLine();
+                            // Need a TTL on this message....
+                            HandleMessaging.SendMessage<LoanResponse>(
+                                Queues.LOANBROKER_OUT,
+                                responeListCopy[ssn].LoanResponses[idx],
+                                TTL);
+                            lock (_listLockObject)
+                            {
+                                _responeList.Remove(ssn);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

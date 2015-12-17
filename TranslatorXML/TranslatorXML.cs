@@ -12,19 +12,8 @@ namespace TranslatorXML
         static void Main(string[] args)
         {
             Console.Title = "Translator XML";
-            Console.SetWindowPosition(0, 0);
             Console.SetWindowSize(80, 5);
-            //if (args.Length < 1)
-            //{
-            //    Console.BackgroundColor = ConsoleColor.Red;
-            //    Console.Error.WriteLine("Usage: {0} [routingkey]", Environment.GetCommandLineArgs()[0]);
-            //    Console.BackgroundColor = ConsoleColor.Black;
-            //    Console.WriteLine(" Press [enter] to exit.");
 
-            //    Console.ReadLine();
-            //    Environment.ExitCode = 1;
-            //    return;
-            //}
 
             string routingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQXMLBank;
 

@@ -12,7 +12,6 @@ namespace RabbitMQXMLBankNormalizer
         public static void Main(string[] args)
         {
             Console.Title = "RabbitMQXMLBankNormalizer";
-            Console.SetWindowPosition(0, 0);
             Console.SetWindowSize(80, 5);
             HandleMessaging.RecieveMessage(Queues.RABBITMQXMLBANK_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
