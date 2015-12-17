@@ -64,6 +64,45 @@ namespace LoanBroker.Utility
         /// Sends a message with the given type as the body, in the given queue
         /// </summary>
         /// <typeparam name="T">Type of object to send</typeparam>
+        /// <param name="queueName">The queue name to send the message to</param>
+        /// <param name="messageObject">The object to send</param>
+        /// <param name="TTL">Message time-to-live in ms</param>
+        /// <returns></returns>
+        public static bool SendMessage<T>(string queueName, T messageObject, int TTL)
+        {
+            bool result = true; ;
+
+            try
+            {
+                string jSonString = JsonConvert.SerializeObject(messageObject);
+                byte[] body = Encoding.UTF8.GetBytes(jSonString);
+
+                var props = Channel.CreateBasicProperties();
+                props.Expiration = TTL.ToString();
+                Channel.BasicPublish(exchange: "",
+                                     routingKey: queueName,
+                                     basicProperties: props,
+                                     body: body);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(" An error occured: ");
+                Console.WriteLine(e.Message);
+                Console.WriteLine(" No message has been sent. ");
+
+                result = false;
+            }
+
+            // Test for fetching .resx resources (Det er måske bare forvirrende med brugen af resx filer her?)
+            //// Console.WriteLine("Queue name: " + messaging_resources.ResourceManager.GetString("QueueNameNormalizerOut"));
+
+            return result;
+        }
+
+        /// <summary>
+        /// Sends a message with the given type as the body, in the given queue
+        /// </summary>
+        /// <typeparam name="T">Type of object to send</typeparam>
         /// <param name="exchangeName">The name of the exchange</param>
         /// <param name="exchangeType">Type of exchange. Defaults to direct</param>
         /// <param name="messageObject">The object to send</param>

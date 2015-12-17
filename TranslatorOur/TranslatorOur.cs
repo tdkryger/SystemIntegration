@@ -27,12 +27,12 @@ namespace TranslatorOur
             //}
 
             string routingKey = LoanBroker.Utility.BankingUtility.ROUTING_KEY_RabbitMQOURBank;
-
-            Console.WriteLine("<--Listening for messages on exchange: " + Queues.RULEBASEFETCHER_OUT + " with routing key: " + routingKey);
+            
+            Console.WriteLine("<--Listening for messages on exchange: " + Queues.DELEGATER_OUT + " with routing key: " + routingKey);
 
             HandleMessaging.RecieveMessage(Queues.RULEBASEFETCHER_OUT, string.Format("QUEUE_{0}", routingKey), routingKey, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on exchange: " + Queues.RULEBASEFETCHER_OUT);
+                Console.WriteLine("<--Message recieved on exchange: " + Queues.DELEGATER_OUT);
 
                 LoanRequest loanRequest;
 
@@ -51,7 +51,7 @@ namespace TranslatorOur
         {
             //SSN;CreditScore;Amount;Duration
             string msg = string.Format("{0};{1};{2};{3}", loanRequest.SSN, loanRequest.CreditScore, loanRequest.Amount, loanRequest.Duration);
-            HandleMessaging.SendMessage<string>(Queues.RABBITMQOURBANK_OUT, msg);
+            HandleMessaging.SendMessage<string>(Queues.RABBITMQOURBANK_IN, msg);
         }
     }
 }

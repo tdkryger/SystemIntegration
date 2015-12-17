@@ -12,7 +12,6 @@ namespace RabbitMQOurBankNormalizer
         public static void Main(string[] args)
         {
             Console.Title = "RabbitMQOurBankNormalizer";
-            Console.SetWindowPosition(0, 0);
             Console.SetWindowSize(80, 5);
             HandleMessaging.RecieveMessage(Queues.RABBITMQOURBANK_OUT, (object model, BasicDeliverEventArgs ea) =>
             {
@@ -20,6 +19,8 @@ namespace RabbitMQOurBankNormalizer
 
                 LoanResponse loanResponse;
                 OurBankResponse bankResponse;
+
+                string s = Encoding.UTF8.GetString(ea.Body);
 
                 //TODO: TDK: Error here.. Gets a loan request and not a ourbankresponse
                 bankResponse = JsonConvert.DeserializeObject<OurBankResponse>(Encoding.UTF8.GetString(ea.Body));

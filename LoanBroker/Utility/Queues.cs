@@ -14,6 +14,7 @@
         public readonly static string BANK_OUT = string.Format("{0}bank_out", PREFIX);
         public readonly static string DELEGATER_OUT = string.Format("{0}delegater_out", PREFIX);
         public readonly static string RABBITMQJSONBANK_OUT = string.Format("{0}rabbitmqjsonbank_out", PREFIX);
+        public readonly static string RABBITMQOURBANK_IN = string.Format("{0}rabbitmqourbank_in", PREFIX);
         public readonly static string RABBITMQOURBANK_OUT = string.Format("{0}rabbitmqourbank_out", PREFIX);
         public readonly static string RABBITMQXMLBANK_OUT = string.Format("{0}rabbitmqxmlbank_out", PREFIX);
         public readonly static string BANKFETCHER_OUT = string.Format("{0}bankfetcher_out", PREFIX);

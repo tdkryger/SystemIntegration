@@ -3,7 +3,7 @@
   <Class Name="LoanBroker.model.Bank">
     <Position X="1" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>iAACAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAiAAIAAAA=</HashCode>
+      <HashCode>iAACAAAAAAAgAAAAAAAAAAQAAAAAAAACAAAiAAIAAAA=</HashCode>
       <FileName>model\Bank.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -19,6 +19,13 @@
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAAAEAAAAAAAAAAEAAAAAABAAAAAAAAA=</HashCode>
       <FileName>model\LoanResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoanBroker.model.OurBankResponse">
+    <Position X="7.5" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAQAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>model\OurBankResponse.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

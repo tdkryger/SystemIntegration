@@ -78,8 +78,11 @@ namespace LoanBrokerWebService
                                          consumer: consumer);
                     bool weDontHaveIt = true;
 
+                    int loopCount = 0;
+
                     while (weDontHaveIt)
                     {
+                        //Looks like the items stays in the queue
                         BasicDeliverEventArgs ea = consumer.Queue.Dequeue();
                         LoanBroker.model.LoanResponse loanResponse = JsonConvert.DeserializeObject<LoanBroker.model.LoanResponse>(Encoding.UTF8.GetString(ea.Body));
                         if (loanRequest.SSN == loanResponse.SSN)
@@ -89,9 +92,18 @@ namespace LoanBrokerWebService
                         }
                         else
                         {
-                            // Return it to the queue
-                            channel.BasicReject(ea.DeliveryTag, true);
+                            // Old messages in the queue. Should use message TTL in aggregator
+                            if (loopCount < 5000)
+                            {
+                                // Return it to the queue
+                                // what is the difference between true and false?
+                                channel.BasicReject(ea.DeliveryTag, false);
+                                //channel.BasicReject(ea.DeliveryTag, true);
+                            }
+                            else
+                                loopCount = 0;
                         }
+                        loopCount++;
 
                     }
                 }

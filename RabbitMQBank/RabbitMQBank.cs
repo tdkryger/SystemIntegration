@@ -13,10 +13,10 @@ namespace RabbitMQBank
             Console.Title = "RabbitMQBank";
             Console.SetWindowPosition(0, 0);
             Console.SetWindowSize(80, 5);
-            Console.WriteLine("<--Listening for messages on queue: " + Queues.DELEGATER_OUT);
-            HandleMessaging.RecieveMessage(Queues.DELEGATER_OUT, (object model, BasicDeliverEventArgs ea) =>
+            Console.WriteLine("<--Listening for messages on queue: " + Queues.RABBITMQOURBANK_IN);
+            HandleMessaging.RecieveMessage(Queues.RABBITMQOURBANK_IN, (object model, BasicDeliverEventArgs ea) =>
             {
-                Console.WriteLine("<--Message recieved on queue: " + Queues.DELEGATER_OUT);
+                Console.WriteLine("<--Message recieved on queue: " + Queues.RABBITMQOURBANK_IN);
 
                 byte[] inBody = ea.Body;
                 string message = Encoding.UTF8.GetString(inBody);
@@ -25,6 +25,7 @@ namespace RabbitMQBank
                 Console.WriteLine("<--" + message);
 
                 //SSN;CreditScore;Amount;Duration
+                message = message.Replace("\"", "");
                 string[] parts = message.Split(';');
                 string ssn = parts[0];
                 int creditScore = 0;
@@ -45,10 +46,10 @@ namespace RabbitMQBank
 
                 string msg = JsonConvert.SerializeObject(bankResponse);
 
-                Console.WriteLine("<--Sending message on queue: " + Queues.BANK_OUT + " > " + msg);
+                Console.WriteLine("<--Sending message on queue: " + Queues.RABBITMQOURBANK_OUT + " > " + msg);
                 Console.WriteLine();
 
-                HandleMessaging.SendMessage<LoanBroker.model.OurBankResponse>(Queues.BANK_OUT, bankResponse);
+                HandleMessaging.SendMessage<LoanBroker.model.OurBankResponse>(Queues.RABBITMQOURBANK_OUT, bankResponse);
             });
         }
     }
