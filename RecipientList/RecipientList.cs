@@ -35,7 +35,7 @@ namespace RecipientList
                     foreach (Bank bank in loanRequest.Banks)
                     {
                         //TDK: is this the best way to do Routing key? I think so. 
-                        HandleMessaging.SendMessage<LoanRequest>(Queues.RULEBASEFETCHER_OUT, bank.RoutingKey, loanRequest);
+                        HandleMessaging.SendMessage<LoanRequest>(Queues.RULEBASEFETCHER_OUT, bank.RoutingKey, string.Empty, loanRequest);
                         Console.WriteLine("<--Sending message on exchange: " + Queues.RULEBASEFETCHER_OUT + " with routing key: " + bank.RoutingKey);
                         Console.WriteLine();
                     }
