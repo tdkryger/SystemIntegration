@@ -53,6 +53,9 @@ namespace TranslatorJSON
             //    + ",\"loanAmount\":" + loanRequest.Amount.ToString(CultureInfo.CreateSpecificCulture("en-GB"))
             //    + ",\"loanDuration\":" + loanRequest.Duration.ToString()
             //    + ",\"rki\":false }";
+            
+
+            //TODO: 18/12/2015 A java group says we have to send a json object...
             string msg = "{ \"ssn\":" + loanRequest.SSN.Replace("-", "")
                 + ",\"creditScore\":"  + loanRequest.CreditScore.ToString()
                 + ",\"loanAmount\":" + loanRequest.Amount.ToString(CultureInfo.CreateSpecificCulture("en-GB")) 
