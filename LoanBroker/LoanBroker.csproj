@@ -58,7 +58,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TranslatorBase.cs" />
     <Compile Include="Utility\BankingUtility.cs" />
     <Compile Include="Utility\HandleMessaging.cs" />
     <Compile Include="Utility\Queues.cs" />
