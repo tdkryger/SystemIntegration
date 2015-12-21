@@ -38,6 +38,16 @@ namespace LoanBrokerWebService
         [WebMethod]
         public string GetLoanQuoute(string ssn, decimal amount, int duration)
         {
+            if (ssn.Length != 11)
+                throw new ArgumentException("SSN must be in the format 'xxxxxx-xxxx'");
+            if (ssn.Substring(6, 1) != "-")
+                throw new ArgumentException("SSN must be in the format 'xxxxxx-xxxx'");
+
+            if (amount <= 0)
+                throw new ArgumentException("Amount must be greater than 0");
+            if (duration <= 0)
+                throw new ArgumentException("Duration must be greater than 0");
+
             LoanBroker.model.LoanRequest loanRequest = new LoanBroker.model.LoanRequest()
             {
                 Amount = amount,
