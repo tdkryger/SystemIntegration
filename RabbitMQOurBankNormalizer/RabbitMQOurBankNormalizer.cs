@@ -18,18 +18,11 @@ namespace RabbitMQOurBankNormalizer
                 Console.WriteLine("<--Message recieved on queue: " + Queues.RABBITMQOURBANK_OUT);
 
                 LoanResponse loanResponse;
-                OurBankResponse bankResponse;
 
                 string s = Encoding.UTF8.GetString(ea.Body);
 
                 //TODO: TDK: Error here.. Gets a loan request and not a ourbankresponse
-                bankResponse = JsonConvert.DeserializeObject<OurBankResponse>(Encoding.UTF8.GetString(ea.Body));
-                loanResponse = new LoanResponse()
-                {
-                    InterestRate = bankResponse.InterestRate,
-                    SSN = bankResponse.SSN,
-                    BankName = bankResponse.Name
-                };
+                loanResponse = JsonConvert.DeserializeObject<LoanResponse>(Encoding.UTF8.GetString(ea.Body));
 
                 Console.WriteLine("<--Sending message on queue: " + Queues.NORMALIZER_OUT);
                 Console.WriteLine();

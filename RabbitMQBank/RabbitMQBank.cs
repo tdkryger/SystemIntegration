@@ -35,21 +35,21 @@ namespace RabbitMQBank
                 int duration = 0;
                 int.TryParse(parts[3], out duration);
 
-                LoanBroker.model.OurBankResponse bankResponse = new LoanBroker.model.OurBankResponse()
+                LoanBroker.model.LoanResponse loanResponse = new LoanBroker.model.LoanResponse()
                 {
                     InterestRate = BankingUtility.ProcessLoanRequest(ssn, creditScore, amount, duration),
-                    Name = "Our RabbitMQ Bank",
+                    BankName = "Our RabbitMQ Bank",
                     SSN = ssn
                 };
 
                 //decimal sendMessage = BankingUtility.ProcessLoanRequest(ssn, creditScore, amount, duration);
 
-                string msg = JsonConvert.SerializeObject(bankResponse);
+                string msg = JsonConvert.SerializeObject(loanResponse);
 
                 Console.WriteLine("<--Sending message on queue: " + Queues.RABBITMQOURBANK_OUT + " > " + msg);
                 Console.WriteLine();
 
-                HandleMessaging.SendMessage<LoanBroker.model.OurBankResponse>(Queues.RABBITMQOURBANK_OUT, bankResponse);
+                HandleMessaging.SendMessage<LoanBroker.model.LoanResponse>(Queues.RABBITMQOURBANK_OUT, loanResponse);
             });
         }
     }
